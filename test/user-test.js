@@ -32,10 +32,10 @@ console.log(user2, 'user2')
     expect(user2.id).to.equal(1)
   });
 
-  it('should keep track of past bookings', function () {
-    user2.getBookings(bookings)
+  it('should keep track of all bookings', function () {
+    user2.getAllBookings(bookings)
 
-    expect(user2.bookings).to.deep.equal(
+    expect(user2.allBookings).to.deep.equal(
       [{
         id: "5fwrgu4i7k55hl6t7",
         userID: 1,
@@ -49,7 +49,33 @@ console.log(user2, 'user2')
         date: "2022/02/05",
         roomNumber: 12,
         roomServiceCharges: [],
-      }]
+        },
+      {
+        id: "5fwrgu4i7k55hl6a9",
+        userID: 1,
+        date: "2021/02/05",
+        roomNumber: 15,
+        roomServiceCharges: [],
+    },]
     );
+  })
+
+  it('should be able to see past bookings', function () {
+    user2.getPastBookings()
+
+    expect(user2.pastBookings).to.deep.equal([{
+        id: "5fwrgu4i7k55hl6t7",
+        userID: 1,
+        date: "2022/02/16",
+        roomNumber: 7,
+        roomServiceCharges: [],
+      },
+      {
+        id: "5fwrgu4i7k55hl6t8",
+        userID: 1,
+        date: "2022/02/05",
+        roomNumber: 12,
+        roomServiceCharges: [],
+        }])
   })
 });
