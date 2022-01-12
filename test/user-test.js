@@ -61,9 +61,23 @@ console.log(user2, 'user2')
   })
 
   it('should be able to see past bookings', function () {
-    user2.getPastBookings()
+    user2.getPastAndFutureBookings()
 
     expect(user2.pastBookings).to.deep.equal([{
+        id: "5fwrgu4i7k55hl6a9",
+        userID: 1,
+        date: "2021/02/05",
+        roomNumber: 15,
+        roomServiceCharges: [],
+    },
+    ])
+  })
+
+  it('should be able to see future bookings', function () {
+    user2.getPastAndFutureBookings()
+
+    expect(user2.futureBookings).to.deep.equal([
+      {
         id: "5fwrgu4i7k55hl6t7",
         userID: 1,
         date: "2022/02/16",
@@ -76,6 +90,7 @@ console.log(user2, 'user2')
         date: "2022/02/05",
         roomNumber: 12,
         roomServiceCharges: [],
-        }])
+      },
+    ]);
   })
 });
