@@ -5,6 +5,7 @@ class User {
         this.allBookings = [];
         this.pastBookings = [];
         this.futureBookings = [];
+        this.totalSpent = 0;
     }
 
     getAllBookings(bookings) {
@@ -19,14 +20,15 @@ class User {
             let dateOne = new Date(booking.date);
             if (dateOne < todayDate && booking.userID === this.id) {
                 this.pastBookings.push(booking)
-                console.log(this.pastBookings, 'past booking')
             } else if (booking.userID === this.id && dateOne > todayDate) {
                 this.futureBookings.push(booking);
-                console.log(this.futureBookings, 'future bookings')
-            }
-        })
-    }
-    
+            };
+        });
+    };
+
+    getTotalSpent(rooms) {
+        rooms.forEach(room => this.pastBookings.forEach(booking => booking.roomNumber === room.number ? this.totalSpent += room.costPerNight : booking));
+    };
 }
 
 export default User
