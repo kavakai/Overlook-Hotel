@@ -20,11 +20,10 @@ let allBookings = [];
 
 Promise.all([userData, roomsData, allBookingsData])
     .then((data) => {
-        console.log(data, 'userData')
         allUsers = data[0].customers.map(user => {
-            return new User(user.name, user.id)
+            return new User(user)
         })
-        currentUser = allUsers[0][Math.floor(Math.random() * allUsers.length)]
+        currentUser = allUsers[Math.floor(Math.random() * allUsers.length)]
         console.log(currentUser, 'user')
     })
 
