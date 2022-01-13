@@ -8,10 +8,12 @@
 </head>
 <body>
   <nav>
-    <img src="./images/image-from-rawpixel-id-3018024-png.png" alt="Hotel Logo">
+    <img id="logo" src="./images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png" alt="Hotel Logo">
     <div class="nav-buttons">
-      <button id="checkIn">Check In</button>
-      <button id="checkOut">Check Out</button>
+      <label for="checkIn">Check In</label>
+      <input id="checkIn" type="date">
+      <label for="checkOut">Check Out</label>
+      <input id="checkOut" type="date">
       <button id="roomType">Room Type</button>
       <button id="bookBtn">Book</button>
     </div>
@@ -25,7 +27,6 @@
       <article id="totalSpent">Total Spent</article>
     </section>
   </main>
-  
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 

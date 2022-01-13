@@ -3,13 +3,14 @@
 @import '_reset';
 
 body {
-  background: $primary-background;
+  background: $primary-background, url('/Users/kaicoder/turing/mod2/projects/Overlook-Hotel/src/images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png');
 }
 
 nav {
   display: flex;
   justify-content: space-around;
 }
+
 
 .nav-buttons {
   display: flex;
@@ -24,6 +25,12 @@ nav {
   align-items: center;
   justify-content: space-evenly;
   height: 60vh;
+}
+
+#logo{
+  display: flex;
+  height: 10vh;
+  width: auto;
 }
 
 
