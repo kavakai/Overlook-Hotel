@@ -20,8 +20,36 @@
   <main>
     <section id="mainScreen">
       <h1 id="welcome">Welcome User</h1>
-      <article id="pastBook">Past Bookings</article>
-      <article id="futureBook">Upcoming Bookings</article>
+      <article id="pastBook">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2">Past Bookings</th>  
+            </tr>
+          </thead>
+          <tbody class="table" id='pastStay'>
+            <tr>
+              <td id="pastStayDate">stay date</td>
+              <td id="pastStayRoom">room #</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <article id="futureBook">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2">Upcoming Stays</th>
+            </tr>
+          </thead>
+          <tbody id="futureStay">
+            <tr>
+              <td>stay date</td>
+              <td>room #</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
       <article id="totalSpent">Total Spent</article>
     </section>
   </main>

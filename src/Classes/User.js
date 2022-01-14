@@ -10,6 +10,7 @@ class User {
 
     getAllBookings(bookings) {
         bookings.forEach(booking => booking.userID === this.id ? this.allBookings.push(booking) : booking);
+        this.getPastAndFutureBookings();
     };
 
     getPastAndFutureBookings() {
@@ -24,11 +25,25 @@ class User {
                 this.futureBookings.push(booking);
             };
         });
+        this.sortBookings()
     };
 
     getTotalSpent(rooms) {
-        rooms.forEach(room => this.pastBookings.forEach(booking => booking.roomNumber === room.number ? this.totalSpent += room.costPerNight : booking));
+        rooms.forEach(room => {
+            this.pastBookings.forEach((booking) =>
+              booking.roomNumber === room.number
+                ? (this.totalSpent += room.costPerNight)
+                : booking
+            );
+        });
+        return this.totalSpent.toFixed(2)
     };
+
+    sortBookings() {
+        this.futureBookings = this.futureBookings.sort((bookingA, bookingB) => bookingA.date < bookingB.date);
+        this.pastBookings = this.pastBookings.sort((bookingA, bookingB) => bookingA.date < bookingB.date);
+        console.log(this.futureBookings, 'future')
+    }
 }
 
 export default User

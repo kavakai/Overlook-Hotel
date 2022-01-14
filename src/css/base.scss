@@ -3,7 +3,7 @@
 @import '_reset';
 
 body {
-  background: $primary-background, url('/Users/kaicoder/turing/mod2/projects/Overlook-Hotel/src/images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png');
+  background: $primary-background;
 }
 
 nav {
@@ -20,17 +20,27 @@ nav {
 }
 
 #mainScreen {
+  margin-top: 5em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   height: 60vh;
 }
 
 #logo{
   display: flex;
-  height: 10vh;
+  height: 12vh;
   width: auto;
+}
+
+table, th, td {
+  margin-top: 2em;
+  border: 1px solid black;
+}
+
+#totalSpent{
+  margin-top: 2em;
 }
 
 

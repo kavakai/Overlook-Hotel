@@ -28,6 +28,7 @@ Promise.all([userData, roomsData, allBookingsData])
         });
         currentUser = allUsers[Math.floor(Math.random() * allUsers.length)];
         allBookings.forEach(booking => currentUser.getAllBookings(booking));
+        currentUser.getTotalSpent(allRooms.flat(1))
         domUpdates.displayCurrentUserInfo(currentUser)
     });
 
