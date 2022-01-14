@@ -42,8 +42,11 @@ class User {
     sortBookings() {
         this.futureBookings = this.futureBookings.sort((bookingA, bookingB) => bookingA.date < bookingB.date);
         this.pastBookings = this.pastBookings.sort((bookingA, bookingB) => bookingA.date < bookingB.date);
-        console.log(this.futureBookings, 'future')
+    };
+
+    bookRoom() {
+
     }
-}
+};
 
 export default User

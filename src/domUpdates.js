@@ -3,7 +3,6 @@ import bookingsData from "../test/bookings-test-data";
 const domUpdates = {
 
     displayCurrentUserInfo(user) {
-        console.log(user.totalSpent, 'total')
         const welcomeMsg = document.getElementById('welcome');
         const pastStay = document.getElementById('pastStay');
         const totalAmt = document.getElementById('totalSpent');

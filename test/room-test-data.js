@@ -19,8 +19,8 @@ const roomsData = {
     {
       number: 24,
       roomType: "suite",
-      bidet: false,
-      bedSize: "queen",
+      bidet: true,
+      bedSize: "king",
       numBeds: 1,
       costPerNight: 327.24,
     },
