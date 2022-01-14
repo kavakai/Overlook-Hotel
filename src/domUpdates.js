@@ -15,22 +15,31 @@ const domUpdates = {
              <tr>
               <td id="pastStayDate">${booking.date}</td>
               <td id="pastStayRoom">${booking.roomNumber} #</td>
+              <td id="pastStayType"></td>
             </tr>
             `;
 
             totalAmt.innerText = `$${user.totalSpent} Spent on Rooms`
         });
         user.futureBookings.map(booking => {
+            console.log(booking, 'booking')
             futureStay.innerHTML += `
              <tr>
               <td id="futureStayDate">${booking.date}</td>
               <td id="futureStayRoom">${booking.roomNumber} #</td>
+              <td id="futureStayType"></td>
             </tr>
             `;
-        })
-        // display 'welcome user.name'
-        // past bookings => table with date of stay, room# 
-    }
+        });
+    },
+
+    confirmBooking() {
+
+    },
+
+    rejectBooking() {
+
+    },
 };
 
 export default domUpdates

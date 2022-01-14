@@ -32,3 +32,7 @@ Promise.all([userData, roomsData, allBookingsData])
         domUpdates.displayCurrentUserInfo(currentUser)
     });
 
+const confirmBooking = () => {
+    
+}    
+
