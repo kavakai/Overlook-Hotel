@@ -9,8 +9,7 @@ const usersTest = {
             "name": "Rocio Schuster"
         },
         {
-            "id": 3,
-            "name": "Kelvin Schiller"
+            "name": ''
         },
     ]
 }

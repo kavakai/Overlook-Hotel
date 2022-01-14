@@ -9,11 +9,13 @@ const bookings = bookingsData['bookings'];
 const users = usersTest;
 const user = users['customers'][1];
 const secondUser = users['customers'][0];
+const thirdUser = users['customers'][2];
 const rooms = roomsData['rooms'];
 
 describe('User', function () {
   const user1 = new User(user)
   const user2 = new User(secondUser)
+  const user3 = new User(thirdUser)
 
   it('should be a function', function () {
     expect(User).to.be.a('function');
@@ -25,11 +27,13 @@ describe('User', function () {
 
   it('should have a name', function() {
     expect(user1.name).to.equal('Rocio Schuster')
+    expect(user3.name).to.equal('new user')
   });
 
   it('should have a unique id', function () {
     expect(user1.id).to.equal(2)
     expect(user2.id).to.equal(1)
+    expect(user3.id).to.be.a('number')
   });
 
   it('should keep track of all bookings', function () {

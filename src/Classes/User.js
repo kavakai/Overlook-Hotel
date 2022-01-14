@@ -1,7 +1,7 @@
 class User {
     constructor(user) {
-        this.name = user.name;
-        this.id = user.id;
+        this.name = user.name || 'new user';
+        this.id = user.id || Date.now();
         this.allBookings = [];
         this.pastBookings = [];
         this.futureBookings = [];
