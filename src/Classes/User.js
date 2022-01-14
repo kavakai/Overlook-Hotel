@@ -40,8 +40,13 @@ class User {
     };
 
     sortBookings() {
-        this.futureBookings = this.futureBookings.sort((bookingA, bookingB) => bookingA.date < bookingB.date);
-        this.pastBookings = this.pastBookings.sort((bookingA, bookingB) => bookingA.date < bookingB.date);
+        this.futureBookings = this.futureBookings.sort((bookingA, bookingB) => {
+            return new Date(bookingB.date) - new Date(bookingA.date)
+        });
+
+        this.pastBookings = this.pastBookings.sort((bookingA, bookingB) => {
+            return new Date(bookingB.date) < new Date(bookingA.date)
+        });
     };
 
     bookRoom() {
