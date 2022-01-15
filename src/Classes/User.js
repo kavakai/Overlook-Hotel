@@ -1,7 +1,7 @@
 class User {
     constructor(user) {
-        this.name = user.name;
-        this.id = user.id;
+        this.name = user.name || 'new user';
+        this.id = user.id || Date.now();
         this.allBookings = [];
         this.pastBookings = [];
         this.futureBookings = [];
@@ -10,6 +10,7 @@ class User {
 
     getAllBookings(bookings) {
         bookings.forEach(booking => booking.userID === this.id ? this.allBookings.push(booking) : booking);
+        this.getPastAndFutureBookings();
     };
 
     getPastAndFutureBookings() {
@@ -24,11 +25,33 @@ class User {
                 this.futureBookings.push(booking);
             };
         });
+        this.sortBookings()
     };
 
     getTotalSpent(rooms) {
-        rooms.forEach(room => this.pastBookings.forEach(booking => booking.roomNumber === room.number ? this.totalSpent += room.costPerNight : booking));
+        rooms.forEach(room => {
+            this.pastBookings.forEach((booking) =>
+              booking.roomNumber === room.number
+                ? (this.totalSpent += room.costPerNight)
+                : booking
+            );
+        });
+        return this.totalSpent.toFixed(2)
     };
-}
+
+    sortBookings() {
+        this.futureBookings = this.futureBookings.sort((bookingA, bookingB) => {
+            return new Date(bookingB.date) - new Date(bookingA.date)
+        });
+
+        this.pastBookings = this.pastBookings.sort((bookingA, bookingB) => {
+            return new Date(bookingB.date) < new Date(bookingA.date)
+        });
+    };
+
+    bookRoom() {
+
+    }
+};
 
 export default User

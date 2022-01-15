@@ -4,11 +4,55 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Overlook Hotel</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <nav>
+    <img id="logo" src="./images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png" alt="Hotel Logo">
+    <div class="nav-buttons">
+      <label for="checkIn">Check In</label>
+      <input id="checkIn" type="date">
+      <button id="roomType">Room Type</button>
+      <button id="bookBtn">Book</button>
+    </div>
+    <button id="logOutBtn">Log Out</button>
+  </nav>
+  <main>
+    <section id="mainScreen">
+      <h1 id="welcome">Welcome User</h1>
+      <article id="pastBook">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2">Past Bookings</th>  
+            </tr>
+          </thead>
+          <tbody class="table" id='pastStay'>
+            <tr>
+              <td id="pastStayDate">stay date</td>
+              <td id="pastStayRoom">room #</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <article id="futureBook">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2">Upcoming Stays</th>
+            </tr>
+          </thead>
+          <tbody id="futureStay">
+            <tr>
+              <td>stay date</td>
+              <td>room #</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <article id="totalSpent">Total Spent</article>
+    </section>
+  </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 

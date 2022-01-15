@@ -1,6 +1,51 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_reset';
 
 body {
   background: $primary-background;
 }
+
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5em 3em .5em 3em;
+  gap: 30px;
+}
+
+#mainScreen {
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 60vh;
+}
+
+#logo{
+  display: flex;
+  height: 12vh;
+  width: auto;
+}
+
+table, th, td {
+  margin-top: 2em;
+  border: 1px black;
+  border-style: ridge;
+}
+
+th, td {
+  background-color: #96D4D4;
+}
+
+#totalSpent{
+  margin-top: 2em;
+}
+
+
