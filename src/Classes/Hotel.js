@@ -1,3 +1,5 @@
+import domUpdates from "../domUpdates";
+
 class Hotel {
     constructor(rooms, bookings, user) {
         this.rooms = rooms || [];
@@ -7,6 +9,7 @@ class Hotel {
     };
 
     getAvailableRooms(date) {
+        this.availableRooms = [];
         const currentBookings = this.bookings.flat(1).filter(booking => {
             let requestedDate = date.split('-').join('')
             let bookingDate = booking.date.split('/').join('');
@@ -17,6 +20,7 @@ class Hotel {
             return !num.includes(room.number)
         });
         this.availableRooms.push(available);
+        domUpdates.displayAvailableRooms(this.availableRooms.flat(1))
     };
 };
 

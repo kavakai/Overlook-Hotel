@@ -1,6 +1,12 @@
-import bookingsData from "../test/bookings-test-data";
-
 const domUpdates = {
+
+    hide(element) {
+        element.forEach(element => element.classList.add('hidden')) || element.classList.add(hidden);
+    },
+
+    show(element) {
+        element.classList.remove('hidden');
+    },
 
     displayCurrentUserInfo(user) {
         const welcomeMsg = document.getElementById('welcome');
@@ -32,6 +38,24 @@ const domUpdates = {
         });
     },
 
+    displayAvailableRooms(rooms) {
+        const allRoomsSection = document.getElementById('rooms');
+        allRoomsSection.innerHTML = '';
+        rooms.forEach(room => {
+            allRoomsSection.innerHTML += `
+            <article id="roomDisplay">
+                <h1 id="roomType">${room.roomType}</h1>
+                <li id="roomNum">${room.number}</li>
+                <li id="bidet">${room.bidet}</li>
+                <li id="numBeds">${room.numBeds}</li>
+                <li id="cost">${room.costPerNight}</li>
+            </article>`
+        });
+    },
+
+    filterRooms(value) {
+        console.log(value, 'value')
+    },
     confirmBooking() {
         console.log('im confirming')
     },
