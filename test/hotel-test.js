@@ -9,6 +9,8 @@ const bookings = bookingsData['bookings'];
 
 describe('Hotel', function () {
     const hotel = new Hotel(rooms, bookings);
+    const hotel1 = new Hotel();
+    const date = '2021 - 02 - 05';
 
     it('should be a function', function () {
         expect(Hotel).to.be.a('function');
@@ -56,6 +58,10 @@ describe('Hotel', function () {
                 costPerNight: 491.14,
             },
         ]);
+    });
+
+    it('should default to to no rooms', function () {
+        expect(hotel1.rooms).to.deep.equal([]);
     });
 
     it('should have a list of all bookings', function () {
@@ -110,9 +116,47 @@ describe('Hotel', function () {
                 roomServiceCharges: [],
             },
         ]);
-
-        it('should have a list of all past bookings', function () {
-            expect(hotel.pastBookings).to.deep.equal()
-        })
     });
-})
+
+        it('should have a list of all available rooms', function () {
+            hotel.getAvailableRooms(date);
+
+            expect(hotel.availableRooms).to.deep.equal([
+              [
+                {
+                  number: 7,
+                  roomType: "single room",
+                  bidet: false,
+                  bedSize: "queen",
+                  numBeds: 2,
+                  costPerNight: 231.46,
+                },
+                {
+                  number: 15,
+                  roomType: "residential suite",
+                  bidet: false,
+                  bedSize: "full",
+                  numBeds: 1,
+                  costPerNight: 294.56,
+                },
+                {},
+                {
+                  number: 12,
+                  roomType: "suite",
+                  bidet: true,
+                  bedSize: "king",
+                  numBeds: 2,
+                  costPerNight: 172.09,
+                },
+                {
+                  number: 3,
+                  roomType: "single room",
+                  bidet: false,
+                  bedSize: "king",
+                  numBeds: 1,
+                  costPerNight: 491.14,
+                },
+              ],
+            ]);
+        });
+    });

@@ -3,13 +3,19 @@ import domUpdates from './domUpdates';
 import { userData, roomsData, allBookingsData } from "./apiCalls";
 import Room from './Classes/Room';
 import User from './Classes/User';
+import Bookings from './Classes/Bookings';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/image-from-rawpixel-id-3018024-png.png';
 import './images/turing-logo.png';
 import './images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png'
+import Hotel from './Classes/Hotel';
 
-const checkIn = document.getElementById("checkIn")
+const checkIn = document.getElementById("checkIn");
+document.getElementById("checkIn").valueAsDate = new Date();
+const today = new Date().toISOString().split("T")[0];
+document.getElementById("checkIn").setAttribute('min', today)
+
 
 // Global Variables
 let currentUser;
@@ -18,6 +24,8 @@ let newBooking;
 let allUsers = [];
 let allRooms = [];
 let allBookings = [];
+let currentHotel;
+
 
 Promise.all([userData, roomsData, allBookingsData])
     .then((data) => {
@@ -28,11 +36,17 @@ Promise.all([userData, roomsData, allBookingsData])
         });
         currentUser = allUsers[Math.floor(Math.random() * allUsers.length)];
         allBookings.forEach(booking => currentUser.getAllBookings(booking));
+        allBookings.map(booking => new Bookings(booking));
+        allRooms.map(room => new Room(room));
         currentUser.getTotalSpent(allRooms.flat(1))
+        currentHotel = new Hotel(allRooms, allBookings, currentUser);
         domUpdates.displayCurrentUserInfo(currentUser)
     });
 
-const confirmBooking = () => {
-    
+const confirmBooking = (date) => {
+    currentHotel.getAvailableRooms(date);
 }    
 
+checkIn.addEventListener('change', function () {
+    confirmBooking(checkIn.value)
+})

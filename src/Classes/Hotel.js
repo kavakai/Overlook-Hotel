@@ -1,17 +1,22 @@
-import domUpdates from "../domUpdates";
-
 class Hotel {
-    constructor(rooms, bookings) {
-        this.rooms = rooms;
-        this.bookings = bookings;
+    constructor(rooms, bookings, user) {
+        this.rooms = rooms || [];
+        this.bookings = bookings || [];
+        this.availableRooms = [];
+        this.user = user || '';
     };
 
-    checkAvailability(dates) {
-        this.bookings.forEach(booking => {
-            let bookingDate = new Date(booking.date);
-            let requestedDate = new Date(dates);
-            bookingDate === requestedDate ? domUpdates.confirmBooking() : domUpdates.rejectBooking()
-        })
+    getAvailableRooms(date) {
+        const currentBookings = this.bookings.flat(1).filter(booking => {
+            let requestedDate = date.split('-').join('')
+            let bookingDate = booking.date.split('/').join('');
+            return requestedDate === bookingDate
+        });
+        const available = this.rooms.flat(1).filter(room => {
+            const num = currentBookings.map(book => book.roomNumber)
+            return !num.includes(room.number)
+        });
+        this.availableRooms.push(available);
     };
 };
 

@@ -11,8 +11,14 @@
     <img id="logo" src="./images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png" alt="Hotel Logo">
     <div class="nav-buttons">
       <label for="checkIn">Check In</label>
-      <input id="checkIn" type="date">
-      <button id="roomType">Room Type</button>
+      <input id="checkIn" type="date" required>
+      <select id="roomType" name="Room Type">
+        <option selected="selected" value="Select Room Type">Select Room Type</option>
+        <option value="single room" >Single Room</option>
+        <option value="suite">Suite</option>
+        <option value="junior suite">Junior Suite</option>
+        <option value="residential suite">Residential Suite</option>
+      </select>
       <button id="bookBtn">Book</button>
     </div>
     <button id="logOutBtn">Log Out</button>

@@ -41,7 +41,7 @@ class User {
 
     sortBookings() {
         this.futureBookings = this.futureBookings.sort((bookingA, bookingB) => {
-            return new Date(bookingB.date) - new Date(bookingA.date)
+            return new Date(bookingA.date) - new Date(bookingB.date)
         });
 
         this.pastBookings = this.pastBookings.sort((bookingA, bookingB) => {

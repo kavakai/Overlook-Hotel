@@ -1,8 +1,6 @@
 import chai from "chai";
 import Room from "../src/Classes/Room.js";
 const expect = chai.expect;
-import User from "../src/Classes/User.js";
-import bookingsData from "./bookings-test-data.js";
 import roomsData from "./room-test-data.js";
 
 const rooms = roomsData["rooms"];
@@ -57,5 +55,5 @@ describe('Room', function () {
         expect(room1.costPerNight).to.equal(231.46);
         expect(room2.costPerNight).to.equal(172.09);
         expect(room3.costPerNight).to.equal(0);
-    })
-})
+    });
+});

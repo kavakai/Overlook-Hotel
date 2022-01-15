@@ -97,17 +97,17 @@ describe('User', function () {
 
     expect(user2.futureBookings).to.deep.equal([
       {
-        id: "5fwrgu4i7k55hl6t7",
-        userID: 1,
-        date: "2022/02/16",
-        roomNumber: 7,
-        roomServiceCharges: [],
-      },
-      {
         id: "5fwrgu4i7k55hl6t8",
         userID: 1,
         date: "2022/02/05",
         roomNumber: 12,
+        roomServiceCharges: [],
+      },
+      {
+        id: "5fwrgu4i7k55hl6t7",
+        userID: 1,
+        date: "2022/02/16",
+        roomNumber: 7,
         roomServiceCharges: [],
       },
     ]);

@@ -22,7 +22,6 @@ const domUpdates = {
             totalAmt.innerText = `$${user.totalSpent} Spent on Rooms`
         });
         user.futureBookings.map(booking => {
-            console.log(booking, 'booking')
             futureStay.innerHTML += `
              <tr>
               <td id="futureStayDate">${booking.date}</td>
@@ -34,11 +33,11 @@ const domUpdates = {
     },
 
     confirmBooking() {
-
+        console.log('im confirming')
     },
 
     rejectBooking() {
-
+        console.log('Im rejecting')
     },
 };
 
