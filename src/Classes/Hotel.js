@@ -2,19 +2,19 @@ import domUpdates from "../domUpdates";
 
 class Hotel {
     constructor(rooms, bookings, user) {
-        this.rooms = rooms.flat(1);
-        this.bookings = bookings.flat(1);
+        this.rooms = rooms || [];
+        this.bookings = bookings || [];
         this.availableRooms = [];
-        this.user = user;
+        this.user = user || '';
     };
 
     getAvailableRooms(date) {
-        let currentBookings = this.bookings.filter(booking => {
+        const currentBookings = this.bookings.flat(1).filter(booking => {
             let requestedDate = date.split('-').join('')
             let bookingDate = booking.date.split('/').join('');
             return requestedDate === bookingDate
         });
-        let available = this.rooms.filter(room => {
+        const available = this.rooms.flat(1).filter(room => {
             const num = currentBookings.map(book => book.roomNumber)
             return !num.includes(room.number)
         });

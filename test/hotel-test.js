@@ -9,6 +9,8 @@ const bookings = bookingsData['bookings'];
 
 describe('Hotel', function () {
     const hotel = new Hotel(rooms, bookings);
+    const hotel1 = new Hotel();
+    const date = '2021 - 02 - 05';
 
     it('should be a function', function () {
         expect(Hotel).to.be.a('function');
@@ -56,6 +58,10 @@ describe('Hotel', function () {
                 costPerNight: 491.14,
             },
         ]);
+    });
+
+    it('should default to to no rooms', function () {
+        expect(hotel1.rooms).to.deep.equal([]);
     });
 
     it('should have a list of all bookings', function () {
@@ -111,8 +117,53 @@ describe('Hotel', function () {
             },
         ]);
 
-        it('should have a list of all past bookings', function () {
-            expect(hotel.pastBookings).to.deep.equal()
-        })
+        it('should have a list of all available rooms', function () {
+            hotel.getAvailableRooms(date);
+
+            expect(hotel.availableRooms).to.deep.equal([
+              {
+                id: "5fwrgu4i7k55hl6sz",
+                userID: 2,
+                date: "2022/04/22",
+                roomNumber: 15,
+                roomServiceCharges: [],
+              },
+              {
+                id: "5fwrgu4i7k55hl6t5",
+                userID: 3,
+                date: "2022/01/24",
+                roomNumber: 24,
+                roomServiceCharges: [],
+              },
+              {
+                id: "5fwrgu4i7k55hl6t6",
+                userID: 3,
+                date: "2022/01/10",
+                roomNumber: 12,
+                roomServiceCharges: [],
+              },
+              {
+                id: "5fwrgu4i7k55hl6t7",
+                userID: 1,
+                date: "2022/02/16",
+                roomNumber: 7,
+                roomServiceCharges: [],
+              },
+              {
+                id: "5fwrgu4i7k55hl6t8",
+                userID: 1,
+                date: "2022/02/05",
+                roomNumber: 12,
+                roomServiceCharges: [],
+              },
+              {
+                id: "5fwrgu4i7k55hl6w1",
+                userID: 1,
+                date: "2021/07/13",
+                roomNumber: 3,
+                roomServiceCharges: [],
+              },
+            ]);
+        });
     });
 })
