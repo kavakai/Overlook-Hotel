@@ -2,6 +2,10 @@
 @import '_variables';
 @import '_reset';
 
+.hidden {
+  display: none!important;
+}
+
 body {
   background: $primary-background;
 }
