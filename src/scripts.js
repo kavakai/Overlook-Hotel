@@ -31,12 +31,13 @@ Promise.all([userData, roomsData, allBookingsData])
     .then((data) => {
         allBookings.push(data[2].bookings);
         allRooms.push(data[1].rooms);
-        currentHotel = new Hotel(allRooms, allBookings);
         allUsers = data[0].customers.map(user => {
             return new User(user)
         });
         currentUser = allUsers[Math.floor(Math.random() * allUsers.length)];
         allBookings.forEach(booking => currentUser.getAllBookings(booking));
+        allBookings.map(booking => new Bookings(booking));
+        allRooms.map(room => new Room(room));
         currentUser.getTotalSpent(allRooms.flat(1))
         currentHotel = new Hotel(allRooms, allBookings, currentUser);
         domUpdates.displayCurrentUserInfo(currentUser)

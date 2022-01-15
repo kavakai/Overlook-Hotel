@@ -1,5 +1,3 @@
-import domUpdates from "../domUpdates";
-
 class Hotel {
     constructor(rooms, bookings, user) {
         this.rooms = rooms || [];
