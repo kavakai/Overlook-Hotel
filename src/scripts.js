@@ -9,6 +9,7 @@ import Bookings from './Classes/Bookings';
 import './images/image-from-rawpixel-id-3018024-png.png';
 import './images/turing-logo.png';
 import './images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png'
+import Hotel from './Classes/Hotel';
 
 const checkIn = document.getElementById("checkIn");
 document.getElementById("checkIn").valueAsDate = new Date();
@@ -23,26 +24,28 @@ let newBooking;
 let allUsers = [];
 let allRooms = [];
 let allBookings = [];
+let currentHotel;
 
 
 Promise.all([userData, roomsData, allBookingsData])
     .then((data) => {
         allBookings.push(data[2].bookings);
         allRooms.push(data[1].rooms);
+        currentHotel = new Hotel(allRooms, allBookings);
         allUsers = data[0].customers.map(user => {
             return new User(user)
         });
-        allRooms.map(room => new Room(room));
         currentUser = allUsers[Math.floor(Math.random() * allUsers.length)];
-        allBookings.forEach(booking => {
-            new Bookings(booking);
-            currentUser.getAllBookings(booking);
-        });
-        currentUser.getTotalSpent(allRooms.flat(1));
-        domUpdates.displayCurrentUserInfo(currentUser);
+        allBookings.forEach(booking => currentUser.getAllBookings(booking));
+        currentUser.getTotalSpent(allRooms.flat(1))
+        currentHotel = new Hotel(allRooms, allBookings, currentUser);
+        domUpdates.displayCurrentUserInfo(currentUser)
     });
 
-const confirmBooking = () => {
-    
+const confirmBooking = (date) => {
+    currentHotel.getAvailableRooms(date);
 }    
 
+checkIn.addEventListener('change', function () {
+    confirmBooking(checkIn.value)
+})
