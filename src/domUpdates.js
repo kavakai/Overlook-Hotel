@@ -7,7 +7,6 @@ const totalAmt = document.getElementById("totalSpent");
 const futureStay = document.getElementById("futureStay");
 const mainDisplay = document.getElementById("mainScreen");
 const allRoomsSection = document.getElementById("rooms");
-const modal = document.getElementById("modal");
 
 const domUpdates = {
     hide(element) {
@@ -31,7 +30,7 @@ const domUpdates = {
         futureStay.innerHTML = '';
         user.pastBookings.map((booking) => {
             welcomeMsg.innerText = `
-                Welcome ${user.name}
+                Welcome back ${user.name}
             `;
             pastStay.innerHTML += `
              <tr>
@@ -41,7 +40,7 @@ const domUpdates = {
             </tr>
             `;
 
-            totalAmt.innerText = `$${user.totalSpent.toFixed(2)} Spent on Rooms`;
+            totalAmt.innerText = `You have spent $${user.totalSpent.toFixed(2)} on past visits`;
         });
         user.futureBookings.map((booking) => {
             futureStay.innerHTML += `
@@ -75,14 +74,9 @@ const domUpdates = {
     },
 
     filterRooms(filter, rooms) {
-        const modal = document.querySelector('.modal')
         allRoomsSection.innerHTML = '';
         if (filter === 'Select Room Type') {
             this.displayAvailableRooms(rooms)
-            console.log(window.getComputedStyle(modal), 'modal')
-                if (window.getComputedStyle(modal).display === "none") {
-                  modal.style.display = "block";
-                };
         } else {
             const filtered = rooms.filter(room => room.roomType === filter)
             filtered.forEach(room => {
