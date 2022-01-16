@@ -16,7 +16,8 @@ document.getElementById("checkIn").valueAsDate = new Date();
 const today = new Date().toISOString().split("T")[0];
 document.getElementById("checkIn").setAttribute('min', today);
 const roomFilter = document.getElementById("roomType");
-const roomSelector = document.querySelectorAll('.filter')
+const roomSelector = document.querySelectorAll('.filter');
+const bookRoomsSection = document.getElementById('rooms')
 
 
 // Global Variables
@@ -44,7 +45,11 @@ Promise.all([userData, roomsData, allBookingsData])
         currentHotel = new Hotel(allRooms, allBookings, currentUser);
         domUpdates.displayCurrentUserInfo(currentUser)
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        if (!err.ok) {
+            console.log("sorry");  
+        };
+    });
 
 
 const confirmBooking = (date) => {
@@ -68,4 +73,8 @@ roomFilter.addEventListener('change', function () {
         roomFilter.value,
         currentHotel.availableRooms.flat(1)
     );
+});
+
+bookRoomsSection.addEventListener('click', function (event) {
+    domUpdates.confirmBooking(event, currentHotel.availableRooms.flat(1));
 });

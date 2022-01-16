@@ -1,3 +1,6 @@
+import bookingsData from "../test/bookings-test-data";
+import { userData } from "./apiCalls";
+
 const welcomeMsg = document.getElementById("welcome");
 const pastStay = document.getElementById("pastStay");
 const totalAmt = document.getElementById("totalSpent");
@@ -74,14 +77,27 @@ const domUpdates = {
                 <li id="bidet">${room.bidet}</li>
                 <li id="numBeds">${room.numBeds}</li>
                 <li id="cost">${room.costPerNight}</li>
-                <button>Book</button>
+                <button class="book-button" id=${room.number}>Book</button>
             </article>`;
             });
         };
     },
 
-    confirmBooking() {
-    console.log("im confirming");
+    confirmBooking(event, rooms) {
+        const today = new Date().toISOString().split("T")[0];
+        const roomBook = rooms.find(room => event.target.id == room.number);
+        const booking = {
+            "userId": currentUser.id,
+            "date": today,
+            "roomNumber": roomBook.number
+        }
+        fetch("http://localhost:3001/api/v1/bookings", {
+          method: "POST",
+          body: JSON.stringify(booking),
+          headers: {
+            "Content-Type": "application/json",
+            },
+        });
     },
 
   rejectBooking() {
