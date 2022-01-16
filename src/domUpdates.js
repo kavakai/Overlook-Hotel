@@ -92,12 +92,19 @@ const domUpdates = {
             "roomNumber": roomBook.number
         }
         fetch("http://localhost:3001/api/v1/bookings", {
-          method: "POST",
-          body: JSON.stringify(booking),
-          headers: {
-            "Content-Type": "application/json",
+            method: "POST",
+            body: JSON.stringify(booking),
+            headers: {
+                "Content-Type": "application/json",
             },
-        });
+        })
+            .then((response) => response.json())
+            .catch(err => {
+                if (!err.ok) {
+                    console.log("sorry");
+                };
+            });
+        this.displayCurrentUserInfo(currentUser);
     },
 
   rejectBooking() {
