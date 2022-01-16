@@ -53,8 +53,8 @@ Promise.all([userData, roomsData, allBookingsData])
         };
     });
 
-    const confirmBooking = (event, rooms, currentUser) => {
-        let today = new Date().toISOString().split("T")[0];
+const confirmBooking = (event, rooms, currentUser) => {
+        let today = new Date(checkIn.value).toISOString().split("T")[0];
         today = today.split("-").join("/");
         const roomBook = rooms.find(room => event.target.id == room.number);
         const booking = {

@@ -25,6 +25,10 @@ const domUpdates = {
         this.show(pastStay);
         this.show(totalAmt);
         this.show(futureStay);
+        welcomeMsg.innerText = '';
+        pastStay.innerHTML = '';
+        totalAmt.innerText = '';
+        futureStay.innerHTML = '';
         user.pastBookings.map((booking) => {
             welcomeMsg.innerText = `
                 Welcome ${user.name}
