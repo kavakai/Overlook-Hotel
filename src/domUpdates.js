@@ -1,29 +1,39 @@
 import bookingsData from "../test/bookings-test-data";
-import { userData } from "./apiCalls";
+import User from "./Classes/User";
 
 const welcomeMsg = document.getElementById("welcome");
 const pastStay = document.getElementById("pastStay");
 const totalAmt = document.getElementById("totalSpent");
 const futureStay = document.getElementById("futureStay");
 const mainDisplay = document.getElementById("mainScreen");
-const filter = document.querySelectorAll(".filter");
 const allRoomsSection = document.getElementById("rooms");
+const modal = document.getElementById("modal");
 
 const domUpdates = {
-  hide(element) {
-    element.classList.add('hidden');
-  },
+    hide(element) {
+        element.classList.add('hidden');
+    },
 
-  show(element) {
-    element.classList.remove('hidden');
-  },
+    show(element) {
+        element.classList.remove('hidden');
+    },
 
-  displayCurrentUserInfo(user) {
-    user.pastBookings.map((booking) => {
-      welcomeMsg.innerText = `
+    displayCurrentUserInfo(user) {
+        this.hide(allRoomsSection);
+        this.show(mainDisplay);
+        this.show(welcomeMsg);
+        this.show(pastStay);
+        this.show(totalAmt);
+        this.show(futureStay);
+        welcomeMsg.innerText = '';
+        pastStay.innerHTML = '';
+        totalAmt.innerText = '';
+        futureStay.innerHTML = '';
+        user.pastBookings.map((booking) => {
+            welcomeMsg.innerText = `
                 Welcome ${user.name}
             `;
-      pastStay.innerHTML += `
+            pastStay.innerHTML += `
              <tr>
               <td id="pastStayDate">${booking.date}</td>
               <td id="pastStayRoom">${booking.roomNumber} #</td>
@@ -31,18 +41,18 @@ const domUpdates = {
             </tr>
             `;
 
-      totalAmt.innerText = `$${user.totalSpent} Spent on Rooms`;
-    });
-    user.futureBookings.map((booking) => {
-      futureStay.innerHTML += `
+            totalAmt.innerText = `$${user.totalSpent.toFixed(2)} Spent on Rooms`;
+        });
+        user.futureBookings.map((booking) => {
+            futureStay.innerHTML += `
              <tr>
               <td id="futureStayDate">${booking.date}</td>
               <td id="futureStayRoom">${booking.roomNumber} #</td>
               <td id="futureStayType"></td>
             </tr>
             `;
-    });
-  },
+        });
+    },
 
     displayAvailableRooms(rooms) {
         this.hide(welcomeMsg);
@@ -50,9 +60,10 @@ const domUpdates = {
         this.hide(totalAmt);
         this.hide(futureStay);
         this.hide(mainDisplay);
+        this.show(allRoomsSection);
         allRoomsSection.innerHTML = '';
-    rooms.forEach((room) => {
-        allRoomsSection.innerHTML += `
+        rooms.forEach((room) => {
+            allRoomsSection.innerHTML += `
             <article id="roomDisplay">
                 <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
                 <li id="roomNum">${room.number}</li>
@@ -60,13 +71,18 @@ const domUpdates = {
                 <li id="numBeds">${room.numBeds}</li>
                 <li id="cost">${room.costPerNight}</li>
             </article>`;
-    });
+        });
     },
 
     filterRooms(filter, rooms) {
+        const modal = document.querySelector('.modal')
         allRoomsSection.innerHTML = '';
         if (filter === 'Select Room Type') {
-            this.displayAvailableRooms(rooms);
+            this.displayAvailableRooms(rooms)
+            console.log(window.getComputedStyle(modal), 'modal')
+                if (window.getComputedStyle(modal).display === "none") {
+                  modal.style.display = "block";
+                };
         } else {
             const filtered = rooms.filter(room => room.roomType === filter)
             filtered.forEach(room => {
@@ -82,34 +98,27 @@ const domUpdates = {
             });
         };
     },
-
-    confirmBooking(event, rooms) {
-        const today = new Date().toISOString().split("T")[0];
-        const roomBook = rooms.find(room => event.target.id == room.number);
-        const booking = {
-            "userId": currentUser.id,
-            "date": today,
-            "roomNumber": roomBook.number
-        }
-        fetch("http://localhost:3001/api/v1/bookings", {
-            method: "POST",
-            body: JSON.stringify(booking),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((response) => response.json())
-            .catch(err => {
-                if (!err.ok) {
-                    console.log("sorry");
-                };
-            });
-        this.displayCurrentUserInfo(currentUser);
+    
+    displayConfirm(promise, currentUser) {
+        promise
+            .then(data => this.popUpWindow(data, currentUser))
+        
     },
 
-  rejectBooking() {
+    rejectBooking() {
     console.log("Im rejecting");
-  },
+    },
+  
+    popUpWindow(data, currentUser) {
+        allRoomsSection.innerHTML = `
+        <h1 id="message">${data.message}</h1>
+        <h3>We look forward to seeing you on ${data.newBooking.date}</h3>
+        <h3>Here is your room number: 
+        ${data.newBooking.roomNumber}</h3>
+        <button id="mainPageBtn">Home</button>
+        `
+    },
+
 };
 
 export default domUpdates;

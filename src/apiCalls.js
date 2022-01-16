@@ -10,4 +10,21 @@ const roomsData = fetch("http://localhost:3001/api/v1/rooms")
 const allBookingsData = fetch("http://localhost:3001/api/v1/bookings")
     .then((response) => response.json());
 
-export { userData, roomsData, allBookingsData }
+const updateBookings = (booking) => {
+    fetch("http://localhost:3001/api/v1/bookings", {
+        method: "POST",
+        body: JSON.stringify(booking),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then(response => response.json())
+};
+
+const getUpdatedData = (currentUser) => {
+    const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`;
+    fetch(url)
+        .then((response) => response.json());
+}
+
+export { userData, roomsData, allBookingsData, updateBookings, getUpdatedData }

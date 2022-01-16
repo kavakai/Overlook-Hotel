@@ -17,7 +17,8 @@ const today = new Date().toISOString().split("T")[0];
 document.getElementById("checkIn").setAttribute('min', today);
 const roomFilter = document.getElementById("roomType");
 const roomSelector = document.querySelectorAll('.filter');
-const bookRoomsSection = document.getElementById('rooms')
+const bookRoomsSection = document.getElementById('rooms');
+const homeBtn = document.getElementById('mainPageBtn');
 
 
 // Global Variables
@@ -43,23 +44,67 @@ Promise.all([userData, roomsData, allBookingsData])
         allRooms.map(room => new Room(room));
         currentUser.getTotalSpent(allRooms.flat(1))
         currentHotel = new Hotel(allRooms, allBookings, currentUser);
+        console.log(currentUser, 'initial user')
         domUpdates.displayCurrentUserInfo(currentUser)
     })
     .catch(err => {
         if (!err.ok) {
-            console.log("sorry");  
+            console.log(err);  
         };
     });
 
+const confirmBooking = (event, rooms, currentUser) => {
+        let today = new Date(checkIn.value).toISOString().split("T")[0];
+        today = today.split("-").join("/");
+        const roomBook = rooms.find(room => event.target.id == room.number);
+        const booking = {
+            "userID": currentUser.id,
+            "date": today,
+            "roomNumber": roomBook.number
+        }
+        const promise = fetch("http://localhost:3001/api/v1/bookings", {
+            method: "POST",
+            body: JSON.stringify(booking),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => response.json())
+        domUpdates.displayConfirm(promise, currentUser);
+    }
 
-const confirmBooking = (date) => {
+    const getUpdatedData = () => {
+        const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`
+        const userData = fetch(url)
+            .then(response => response.json());
+        const newBookings = fetch("http://localhost:3001/api/v1/bookings")
+            .then(response => response.json());
+        Promise.all([userData, newBookings])
+            .then(data => {
+                currentUser = new User(data[0])
+                console.log(currentUser, "current user")
+                allBookings = data[1]['bookings'];
+                currentUser.getAllBookings(allBookings)
+                setTimeout(() => {
+                    console.log(currentUser, 'in timeout')
+                }, 1000)
+                console.log(currentUser, "user in Promise")
+                domUpdates.displayCurrentUserInfo(currentUser);
+            })
+        .catch(err => console.log(err))
+    }
+
+
+const booking = (date) => {
     currentHotel.getAvailableRooms(date);
 };
 
 
+
+
 // Event Listeners
 checkIn.addEventListener('change', function () {
-    confirmBooking(checkIn.value);
+    booking(checkIn.value);
     roomSelector.forEach(filter => {
       if (filter.defaultSelected) {
         filter.selected = true;
@@ -76,5 +121,14 @@ roomFilter.addEventListener('change', function () {
 });
 
 bookRoomsSection.addEventListener('click', function (event) {
-    domUpdates.confirmBooking(event, currentHotel.availableRooms.flat(1));
+    if (event.target.id === 'mainPageBtn') {
+        getUpdatedData(currentUser);
+    } else {
+        confirmBooking(
+            event,
+            currentHotel.availableRooms.flat(1),
+            currentUser
+        );
+    };
 });
+
