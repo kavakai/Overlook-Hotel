@@ -62,9 +62,12 @@ const domUpdates = {
 
     filterRooms(filter, rooms) {
         allRoomsSection.innerHTML = '';
-        const filtered = rooms.filter(room => room.roomType === filter)
-        filtered.forEach(room => {
-            allRoomsSection.innerHTML += `
+        if (filter === 'Select Room Type') {
+            this.displayAvailableRooms(rooms);
+        } else {
+            const filtered = rooms.filter(room => room.roomType === filter)
+            filtered.forEach(room => {
+                allRoomsSection.innerHTML += `
             <article id="roomDisplay">
                 <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
                 <li id="roomNum">${room.number}</li>
@@ -72,7 +75,8 @@ const domUpdates = {
                 <li id="numBeds">${room.numBeds}</li>
                 <li id="cost">${room.costPerNight}</li>
             </article>`;
-        });
+            });
+        };
     },
 
     confirmBooking() {
