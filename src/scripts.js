@@ -14,7 +14,10 @@ import Hotel from './Classes/Hotel';
 const checkIn = document.getElementById("checkIn");
 document.getElementById("checkIn").valueAsDate = new Date();
 const today = new Date().toISOString().split("T")[0];
-document.getElementById("checkIn").setAttribute('min', today)
+document.getElementById("checkIn").setAttribute('min', today);
+const roomFilter = document.getElementById("roomType");
+const roomSelector = document.querySelectorAll('.filter');
+const bookRoomsSection = document.getElementById('rooms')
 
 
 // Global Variables
@@ -41,12 +44,37 @@ Promise.all([userData, roomsData, allBookingsData])
         currentUser.getTotalSpent(allRooms.flat(1))
         currentHotel = new Hotel(allRooms, allBookings, currentUser);
         domUpdates.displayCurrentUserInfo(currentUser)
+    })
+    .catch(err => {
+        if (!err.ok) {
+            console.log("sorry");  
+        };
     });
+
 
 const confirmBooking = (date) => {
     currentHotel.getAvailableRooms(date);
-}    
+};
 
+
+// Event Listeners
 checkIn.addEventListener('change', function () {
-    confirmBooking(checkIn.value)
-})
+    confirmBooking(checkIn.value);
+    roomSelector.forEach(filter => {
+      if (filter.defaultSelected) {
+        filter.selected = true;
+        return false;
+        };
+    });
+});
+
+roomFilter.addEventListener('change', function () {
+    domUpdates.filterRooms(
+        roomFilter.value,
+        currentHotel.availableRooms.flat(1)
+    );
+});
+
+bookRoomsSection.addEventListener('click', function (event) {
+    domUpdates.confirmBooking(event, currentHotel.availableRooms.flat(1));
+});

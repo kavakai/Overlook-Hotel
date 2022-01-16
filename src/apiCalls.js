@@ -5,7 +5,7 @@ const userData = fetch("http://localhost:3001/api/v1/customers")
 //     .then((response) => response.json());
 
 const roomsData = fetch("http://localhost:3001/api/v1/rooms")
-.then((response) => response.json());
+    .then((response) => response.json());
 
 const allBookingsData = fetch("http://localhost:3001/api/v1/bookings")
     .then((response) => response.json());
