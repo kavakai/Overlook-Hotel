@@ -57,5 +57,8 @@ checkIn.addEventListener('change', function () {
 });
 
 roomFilter.addEventListener('change', function () {
-    domUpdates.filterRooms(roomFilter.value);
+    domUpdates.filterRooms(
+        roomFilter.value,
+        currentHotel.availableRooms.flat(1)
+    );
 });

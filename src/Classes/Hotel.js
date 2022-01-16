@@ -20,7 +20,7 @@ class Hotel {
             return !num.includes(room.number)
         });
         this.availableRooms.push(available);
-        domUpdates.displayAvailableRooms(this.availableRooms.flat(1))
+        domUpdates.displayAvailableRooms(this.availableRooms.flat(1));
     };
 };
 

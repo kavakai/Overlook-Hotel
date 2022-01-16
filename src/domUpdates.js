@@ -3,6 +3,8 @@ const pastStay = document.getElementById("pastStay");
 const totalAmt = document.getElementById("totalSpent");
 const futureStay = document.getElementById("futureStay");
 const mainDisplay = document.getElementById("mainScreen");
+const filter = document.querySelectorAll(".filter");
+const allRoomsSection = document.getElementById("rooms");
 
 const domUpdates = {
   hide(element) {
@@ -45,26 +47,37 @@ const domUpdates = {
         this.hide(totalAmt);
         this.hide(futureStay);
         this.hide(mainDisplay);
-    const allRoomsSection = document.getElementById("rooms");
-    allRoomsSection.innerHTML = "";
+        allRoomsSection.innerHTML = '';
     rooms.forEach((room) => {
-      allRoomsSection.innerHTML += `
+        allRoomsSection.innerHTML += `
             <article id="roomDisplay">
-                <h1 id="roomType">${room.roomType.toUpperCase()}</h1>
+                <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
                 <li id="roomNum">${room.number}</li>
                 <li id="bidet">${room.bidet}</li>
                 <li id="numBeds">${room.numBeds}</li>
                 <li id="cost">${room.costPerNight}</li>
             </article>`;
     });
-  },
+    },
 
-  filterRooms(value) {
-    console.log(value, "value");
-  },
-  confirmBooking() {
+    filterRooms(filter, rooms) {
+        allRoomsSection.innerHTML = '';
+        const filtered = rooms.filter(room => room.roomType === filter)
+        filtered.forEach(room => {
+            allRoomsSection.innerHTML += `
+            <article id="roomDisplay">
+                <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
+                <li id="roomNum">${room.number}</li>
+                <li id="bidet">${room.bidet}</li>
+                <li id="numBeds">${room.numBeds}</li>
+                <li id="cost">${room.costPerNight}</li>
+            </article>`;
+        });
+    },
+
+    confirmBooking() {
     console.log("im confirming");
-  },
+    },
 
   rejectBooking() {
     console.log("Im rejecting");
