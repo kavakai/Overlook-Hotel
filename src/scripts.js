@@ -76,5 +76,5 @@ roomFilter.addEventListener('change', function () {
 });
 
 bookRoomsSection.addEventListener('click', function (event) {
-    domUpdates.confirmBooking(event, currentHotel.availableRooms.flat(1));
+    domUpdates.confirmBooking(event, currentHotel.availableRooms.flat(1), currentUser);
 });
