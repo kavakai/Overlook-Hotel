@@ -9,21 +9,17 @@ const mainDisplay = document.getElementById("mainScreen");
 const allRoomsSection = document.getElementById("rooms");
 
 const domUpdates = {
-    hide(element) {
-        element.classList.add('hidden');
+    hide(elements) {
+        elements.map(element => element.classList.add('hidden'))
     },
 
-    show(element) {
-        element.classList.remove('hidden');
+    show(elements) {
+        elements.map(element => element.classList.remove('hidden'))
     },
 
     displayCurrentUserInfo(user) {
-        this.hide(allRoomsSection);
-        this.show(mainDisplay);
-        this.show(welcomeMsg);
-        this.show(pastStay);
-        this.show(totalAmt);
-        this.show(futureStay);
+        this.hide([allRoomsSection]);
+        this.show([mainDisplay, welcomeMsg, pastStay, totalAmt, futureStay]);
         welcomeMsg.innerText = '';
         pastStay.innerHTML = '';
         totalAmt.innerText = '';
@@ -54,15 +50,15 @@ const domUpdates = {
     },
 
     displayAvailableRooms(rooms) {
-        this.hide(welcomeMsg);
-        this.hide(pastStay);
-        this.hide(totalAmt);
-        this.hide(futureStay);
-        this.hide(mainDisplay);
-        this.show(allRoomsSection);
+        this.hide([welcomeMsg, pastStay, totalAmt, mainDisplay]);
+        this.show([allRoomsSection]);
         allRoomsSection.innerHTML = '';
-        rooms.forEach((room) => {
-            allRoomsSection.innerHTML += `
+        if (rooms === []) {
+            allRoomsSection.innerHTML = `
+            <h1 id="noRooms">We are so sorry. There are no available rooms for the dates you suggested. Please try another date</h1>`
+        } else {
+            rooms.forEach((room) => {
+                allRoomsSection.innerHTML += `
             <article id="roomDisplay">
                 <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
                 <li id="roomNum">${room.number}</li>
@@ -70,7 +66,8 @@ const domUpdates = {
                 <li id="numBeds">${room.numBeds}</li>
                 <li id="cost">${room.costPerNight}</li>
             </article>`;
-        });
+            });
+        };
     },
 
     filterRooms(filter, rooms) {

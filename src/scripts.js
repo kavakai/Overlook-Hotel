@@ -73,27 +73,26 @@ const confirmBooking = (event, rooms, currentUser) => {
           .then((data) => domUpdates.popUpWindow(data));
     }
 
-    const getUpdatedData = () => {
-        const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`
-        const userData = fetch(url)
-            .then(response => response.json());
-        const newBookings = fetch("http://localhost:3001/api/v1/bookings")
-            .then(response => response.json());
-        Promise.all([userData, newBookings])
-            .then(data => {
-                currentUser = new User(data[0])
-                console.log(currentUser, "current user")
-                allBookings = data[1]['bookings'];
-                currentUser.getAllBookings(allBookings)
-                setTimeout(() => {
-                    console.log(currentUser, 'in timeout')
-                }, 1000)
-                console.log(currentUser, "user in Promise")
-                domUpdates.displayCurrentUserInfo(currentUser);
-            })
+const getUpdatedData = () => {
+    const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`
+    const userData = fetch(url)
+        .then(response => response.json());
+    const newBookings = fetch("http://localhost:3001/api/v1/bookings")
+        .then(response => response.json());
+    Promise.all([userData, newBookings])
+        .then(data => {
+            currentUser = new User(data[0])
+            console.log(currentUser, "current user")
+            allBookings = data[1]['bookings'];
+            currentUser.getAllBookings(allBookings)
+            setTimeout(() => {
+                console.log(currentUser, 'in timeout')
+            }, 1000)
+            console.log(currentUser, "user in Promise")
+            domUpdates.displayCurrentUserInfo(currentUser);
+        })
         .catch(err => console.log(err))
-    }
-
+};
 
 const booking = (date) => {
     currentHotel.getAvailableRooms(date);
