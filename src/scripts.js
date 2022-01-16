@@ -16,6 +16,7 @@ document.getElementById("checkIn").valueAsDate = new Date();
 const today = new Date().toISOString().split("T")[0];
 document.getElementById("checkIn").setAttribute('min', today);
 const roomFilter = document.getElementById("roomType");
+const roomSelector = document.querySelectorAll('.filter')
 
 
 // Global Variables
@@ -54,6 +55,12 @@ const confirmBooking = (date) => {
 // Event Listeners
 checkIn.addEventListener('change', function () {
     confirmBooking(checkIn.value);
+    roomSelector.forEach(filter => {
+      if (filter.defaultSelected) {
+        filter.selected = true;
+        return false;
+        };
+    });
 });
 
 roomFilter.addEventListener('change', function () {

@@ -74,6 +74,7 @@ const domUpdates = {
                 <li id="bidet">${room.bidet}</li>
                 <li id="numBeds">${room.numBeds}</li>
                 <li id="cost">${room.costPerNight}</li>
+                <button>Book</button>
             </article>`;
             });
         };
