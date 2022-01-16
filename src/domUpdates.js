@@ -1,5 +1,5 @@
 import bookingsData from "../test/bookings-test-data";
-import { userData } from "./apiCalls";
+import User from "./Classes/User";
 
 const welcomeMsg = document.getElementById("welcome");
 const pastStay = document.getElementById("pastStay");
@@ -19,7 +19,6 @@ const domUpdates = {
     },
 
     displayCurrentUserInfo(user) {
-        console.log(user, 'user')
         this.hide(allRoomsSection);
         this.show(mainDisplay);
         this.show(welcomeMsg);
@@ -95,37 +94,18 @@ const domUpdates = {
             });
         };
     },
-
-    confirmBooking(event, rooms, currentUser) {
-        let today = new Date().toISOString().split("T")[0];
-        today = today.split("-").join("/");
-        const roomBook = rooms.find(room => event.target.id == room.number);
-        const booking = {
-            "userID": currentUser.id,
-            "date": today,
-            "roomNumber": roomBook.number
-        }
-        const promise = fetch("http://localhost:3001/api/v1/bookings", {
-            method: "POST",
-            body: JSON.stringify(booking),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((response) => response.json())
-        this.displayConfirm(promise);
-    },
     
-    displayConfirm(promise) {
+    displayConfirm(promise, currentUser) {
         promise
-            .then(data => this.popUpWindow(data))
+            .then(data => this.popUpWindow(data, currentUser))
+        
     },
 
     rejectBooking() {
     console.log("Im rejecting");
     },
   
-    popUpWindow(data) {
+    popUpWindow(data, currentUser) {
         allRoomsSection.innerHTML = `
         <h1 id="message">${data.message}</h1>
         <h3>We look forward to seeing you on ${data.newBooking.date}</h3>
@@ -133,7 +113,8 @@ const domUpdates = {
         ${data.newBooking.roomNumber}</h3>
         <button id="mainPageBtn">Home</button>
         `
-  }
+    },
+
 };
 
 export default domUpdates;
