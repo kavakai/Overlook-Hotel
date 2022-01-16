@@ -63,14 +63,14 @@ const confirmBooking = (event, rooms, currentUser) => {
             "roomNumber": roomBook.number
         }
         const promise = fetch("http://localhost:3001/api/v1/bookings", {
-            method: "POST",
-            body: JSON.stringify(booking),
-            headers: {
-                "Content-Type": "application/json",
-            },
+          method: "POST",
+          body: JSON.stringify(booking),
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-            .then((response) => response.json())
-        domUpdates.displayConfirm(promise, currentUser);
+          .then((response) => response.json())
+          .then((data) => domUpdates.popUpWindow(data));
     }
 
     const getUpdatedData = () => {

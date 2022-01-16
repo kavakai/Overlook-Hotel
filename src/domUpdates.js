@@ -92,18 +92,8 @@ const domUpdates = {
             });
         };
     },
-    
-    displayConfirm(promise, currentUser) {
-        promise
-            .then(data => this.popUpWindow(data, currentUser))
-        
-    },
-
-    rejectBooking() {
-    console.log("Im rejecting");
-    },
   
-    popUpWindow(data, currentUser) {
+    popUpWindow(data) {
         allRoomsSection.innerHTML = `
         <h1 id="message">${data.message}</h1>
         <h3>We look forward to seeing you on ${data.newBooking.date}</h3>
