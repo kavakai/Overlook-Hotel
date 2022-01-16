@@ -17,7 +17,8 @@ const today = new Date().toISOString().split("T")[0];
 document.getElementById("checkIn").setAttribute('min', today);
 const roomFilter = document.getElementById("roomType");
 const roomSelector = document.querySelectorAll('.filter');
-const bookRoomsSection = document.getElementById('rooms')
+const bookRoomsSection = document.getElementById('rooms');
+const homeBtn = document.getElementById('mainPageBtn');
 
 
 // Global Variables
@@ -47,7 +48,7 @@ Promise.all([userData, roomsData, allBookingsData])
     })
     .catch(err => {
         if (!err.ok) {
-            console.log("sorry");  
+            console.log(err);  
         };
     });
 
@@ -76,5 +77,15 @@ roomFilter.addEventListener('change', function () {
 });
 
 bookRoomsSection.addEventListener('click', function (event) {
-    domUpdates.confirmBooking(event, currentHotel.availableRooms.flat(1), currentUser);
+    if (event.target.id === 'mainPageBtn') {
+        
+        domUpdates.displayCurrentUserInfo(currentUser);
+    } else {
+        domUpdates.confirmBooking(
+            event,
+            currentHotel.availableRooms.flat(1),
+            currentUser
+        );
+    };
 });
+

@@ -6,7 +6,6 @@ const pastStay = document.getElementById("pastStay");
 const totalAmt = document.getElementById("totalSpent");
 const futureStay = document.getElementById("futureStay");
 const mainDisplay = document.getElementById("mainScreen");
-const filter = document.querySelectorAll(".filter");
 const allRoomsSection = document.getElementById("rooms");
 const modal = document.getElementById("modal");
 
@@ -20,6 +19,13 @@ const domUpdates = {
     },
 
     displayCurrentUserInfo(user) {
+        console.log(user, 'user')
+        this.hide(allRoomsSection);
+        this.show(mainDisplay);
+        this.show(welcomeMsg);
+        this.show(pastStay);
+        this.show(totalAmt);
+        this.show(futureStay);
         user.pastBookings.map((booking) => {
             welcomeMsg.innerText = `
                 Welcome ${user.name}
@@ -32,7 +38,7 @@ const domUpdates = {
             </tr>
             `;
 
-            totalAmt.innerText = `$${user.totalSpent} Spent on Rooms`;
+            totalAmt.innerText = `$${user.totalSpent.toFixed(2)} Spent on Rooms`;
         });
         user.futureBookings.map((booking) => {
             futureStay.innerHTML += `
@@ -51,6 +57,7 @@ const domUpdates = {
         this.hide(totalAmt);
         this.hide(futureStay);
         this.hide(mainDisplay);
+        this.show(allRoomsSection);
         allRoomsSection.innerHTML = '';
         rooms.forEach((room) => {
             allRoomsSection.innerHTML += `
@@ -110,12 +117,11 @@ const domUpdates = {
     },
     
     displayConfirm(promise) {
-        console.log(promise, 'promise')
         promise
             .then(data => this.popUpWindow(data))
     },
 
-  rejectBooking() {
+    rejectBooking() {
     console.log("Im rejecting");
     },
   
@@ -125,6 +131,7 @@ const domUpdates = {
         <h3>We look forward to seeing you on ${data.newBooking.date}</h3>
         <h3>Here is your room number: 
         ${data.newBooking.roomNumber}</h3>
+        <button id="mainPageBtn">Home</button>
         `
   }
 };
