@@ -25,8 +25,18 @@
     </div>
     <button id="logOutBtn">Log Out</button>
   </nav>
-  <main>
-    <section id="mainScreen">
+  <main class="main">
+    <section class="login">
+      <h1>Login</h1>
+      <form class="login-form">
+        <label for="username">Enter you username</label>
+        <input id="username" type="text" name="username" placeholder="Username"><br>
+        <label for="password">Enter you password</label>
+        <input id="password" type="password" name="password" placeholder="Password"><br>
+        <button id="submit">Submit</button>
+      </form>
+    </section>
+    <section class="main-screen hidden" id="mainScreen">
       <article id="userInfo">
         <h1 id="welcome">Welcome User</h1>
         <p id="totalSpent">Total Spent</p>
