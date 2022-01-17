@@ -27,41 +27,46 @@
   </nav>
   <main>
     <section id="mainScreen">
-      <h1 id="welcome">Welcome User</h1>
-      <article id="pastBook">
-        <table class="table">
-          <thead>
-            <tr>
-              <th colspan="2">Past Bookings</th>  
-            </tr>
-          </thead>
-          <tbody class="table" id='pastStay'>
-            <tr>
-              <td id="pastStayDate">stay date</td>
-              <td id="pastStayRoom">room #</td>
-            </tr>
-          </tbody>
-        </table>
+      <article id="userInfo">
+        <h1 id="welcome">Welcome User</h1>
+        <p id="totalSpent">Total Spent</p>
+        <article id="pastBook">
+          <table class="table">
+            <thead>
+              <tr id="pastTitle">Past Bookings
+                <th colspan="1">Date</th>
+                <th colspan="1">Room Number</th>
+                <th colspan="1">Total Spent</th> 
+              </tr>
+            </thead>
+            <tbody class="table" id='pastStay'>
+              <tr>
+                <td id="pastStayDate">stay date</td>
+                <td id="pastStayRoom">room #</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article id="futureBook">
+          <table class="table">
+            <thead>
+              <tr id="futureTitle">Upcoming Stays
+                <th colspan="1">Date</th>
+                <th colspan="1">Room Number</th>
+                <th colspan="1">Total Spent</th>
+              </tr>
+            </thead>
+            <tbody id="futureStay">
+              <tr>
+                <td>stay date</td>
+                <td>room #</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
       </article>
-      <article id="futureBook">
-        <table class="table">
-          <thead>
-            <tr>
-              <th colspan="2">Upcoming Stays</th>
-            </tr>
-          </thead>
-          <tbody id="futureStay">
-            <tr>
-              <td>stay date</td>
-              <td>room #</td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-      <article id="totalSpent">Total Spent</article>
-    </section>
-    <section id="rooms">
-  
+      <section id="rooms">
+      </section>
     </section>
   </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->

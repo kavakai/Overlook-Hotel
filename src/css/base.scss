@@ -29,6 +29,12 @@ nav {
 }
 
 #mainScreen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#userInfo {
   margin-top: 5em;
   display: flex;
   flex-direction: column;
@@ -41,7 +47,12 @@ nav {
 #logo {
   display: flex;
   height: 12vh;
-  width: auto;
+  width: 11vw;
+}
+
+#roomsImg {
+  height: 40vh;
+  width: 40vw;
 }
 
 table,
@@ -56,6 +67,7 @@ td,
 th,
 td,
 #roomDisplay {
+  padding: .5em;
   background-color: #96d4d4;
 }
 

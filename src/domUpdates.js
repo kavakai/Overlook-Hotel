@@ -18,12 +18,13 @@ const domUpdates = {
     },
 
     displayCurrentUserInfo(user) {
-        this.hide([allRoomsSection]);
-        this.show([mainDisplay, welcomeMsg, pastStay, totalAmt, futureStay]);
+        // this.hide([allRoomsSection]);
+        // this.show([mainDisplay, welcomeMsg, pastStay, totalAmt, futureStay]);
         welcomeMsg.innerText = '';
         pastStay.innerHTML = '';
         totalAmt.innerText = '';
         futureStay.innerHTML = '';
+        allRoomsSection.innerHTML = `<img id="roomsImg" src="./images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png" alt="Grand Budapest Hotel Logo"></img>`
         user.pastBookings.map((booking) => {
             welcomeMsg.innerText = `
                 Welcome back ${user.name}
@@ -50,8 +51,8 @@ const domUpdates = {
     },
 
     displayAvailableRooms(rooms) {
-        this.hide([welcomeMsg, pastStay, totalAmt, mainDisplay]);
-        this.show([allRoomsSection]);
+        // this.hide([welcomeMsg, pastStay, totalAmt, mainDisplay]);
+        // this.show([allRoomsSection]);
         allRoomsSection.innerHTML = '';
         if (rooms === []) {
             allRoomsSection.innerHTML = `
