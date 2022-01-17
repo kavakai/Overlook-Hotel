@@ -113,7 +113,6 @@ const domUpdates = {
   },
   
   popUpWindow(data) {
-    console.log(data, 'data')
     allRoomsSection.innerHTML = `
         <h1 id="message">${data.message}</h1>
         <h3>We look forward to seeing you on ${data.newBooking.date}</h3>
