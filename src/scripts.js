@@ -20,6 +20,7 @@ const roomSelector = document.querySelectorAll('.filter');
 const bookRoomsSection = document.getElementById('rooms');
 const homeBtn = document.getElementById('mainPageBtn');
 const loginBtn = document.getElementById('submit')
+const logOut =document.querySelector('.log-out-btn')
 
 
 // Global Variables
@@ -31,27 +32,6 @@ let allRooms = [];
 let allBookings = [];
 let currentHotel;
 
-
-Promise.all([userData, roomsData, allBookingsData])
-  .then((data) => {
-    allBookings.push(data[2].bookings);
-    allRooms.push(data[1].rooms);
-    allUsers = data[0].customers.map(user => {
-      return new User(user)
-    });
-    currentUser = allUsers[Math.floor(Math.random() * allUsers.length)];
-    allBookings.forEach(booking => currentUser.getAllBookings(booking));
-    allBookings.map(booking => new Bookings(booking));
-    allRooms.map(room => new Room(room));
-    currentUser.getTotalSpent(allRooms.flat(1))
-    currentHotel = new Hotel(allRooms, allBookings, currentUser);
-    domUpdates.hide([document.querySelector('.nav-buttons')])
-  })
-  .catch(err => {
-    if (!err.ok) {
-      console.log(err);  
-    }
-  });
 
 const confirmBooking = (event, rooms, currentUser) => {
   let today = new Date(checkIn.value).toISOString().split("T")[0];
@@ -94,6 +74,30 @@ const booking = (date) => {
   currentHotel.getAvailableRooms(date);
 };
 
+const updateData = (id) => {
+    Promise.all([userData, roomsData, allBookingsData])
+        .then((data) => {
+        allBookings.push(data[2].bookings);
+            allRooms.push(data[1].rooms);
+            console.log(id, 'id')
+            currentUser = data[0].customers.find((user) => user.id === id);
+            currentUser = new User(currentUser)
+            allBookings.forEach((booking) =>
+              currentUser.getAllBookings(booking)
+            );
+        allBookings.map((booking) => new Bookings(booking));
+        allRooms.map((room) => new Room(room));
+        currentUser.getTotalSpent(allRooms.flat(1));
+            currentHotel = new Hotel(allRooms, allBookings, currentUser);
+          domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
+        domUpdates.hide([document.querySelector(".nav-buttons"), logOut]);
+      })
+      .catch((err) => {
+        if (!err.ok) {
+          console.log(err);
+        }
+      });
+}
 
 
 
@@ -105,14 +109,18 @@ loginBtn.addEventListener('click', function (event) {
   const password = document.getElementById('password')
 
   if (username.value.slice(0, 8) === 'customer' && password.value === 'overlook2021') {
-    if (username.value.split('').length >= 10) {
+    if (username.value.split('').length > 8) {
       const split = username.value.split('').length - 8;
-      const name = username.value.split("").slice(-split).join("");
-      getUpdatedData(name)
+        let id = username.value.split("").slice(-split);
+        id = parseInt(id, 10);
+        console.log(id, 'id from pass')
+        getUpdatedData(id);
+        updateData(id);
+        
     } else {
       console.log('nope')
     } 
-    domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1))
+    
   } else {
     console.log('wrong')
   }
