@@ -82,13 +82,9 @@ const getUpdatedData = () => {
     Promise.all([userData, newBookings])
         .then(data => {
             currentUser = new User(data[0])
-            console.log(currentUser, "current user")
             allBookings = data[1]['bookings'];
             currentUser.getAllBookings(allBookings)
-            setTimeout(() => {
-                console.log(currentUser, 'in timeout')
-            }, 1000)
-            console.log(currentUser, "user in Promise")
+            currentUser.getTotalSpent(allRooms.flat(1))
             domUpdates.displayCurrentUserInfo(currentUser);
         })
         .catch(err => console.log(err))
