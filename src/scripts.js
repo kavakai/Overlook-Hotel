@@ -1,6 +1,6 @@
 import './css/base.scss';
 import domUpdates from './domUpdates';
-import { userData, roomsData, allBookingsData } from "./apiCalls";
+import { userData, roomsData, allBookingsData, updateBookings, getUpdatedData } from "./apiCalls";
 import Room from './Classes/Room';
 import User from './Classes/User';
 import Bookings from './Classes/Bookings';
@@ -45,7 +45,7 @@ Promise.all([userData, roomsData, allBookingsData])
     allRooms.map(room => new Room(room));
     currentUser.getTotalSpent(allRooms.flat(1))
     currentHotel = new Hotel(allRooms, allBookings, currentUser);
-    // domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1))
+    domUpdates.hide([document.querySelector('.nav-buttons')])
   })
   .catch(err => {
     if (!err.ok) {
@@ -73,22 +73,22 @@ const confirmBooking = (event, rooms, currentUser) => {
     .then((data) => domUpdates.popUpWindow(data));
 }
 
-const getUpdatedData = () => {
-  const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`
-  const userData = fetch(url)
-    .then(response => response.json());
-  const newBookings = fetch("http://localhost:3001/api/v1/bookings")
-    .then(response => response.json());
-  Promise.all([userData, newBookings])
-    .then(data => {
-      currentUser = new User(data[0])
-      allBookings = data[1]['bookings'];
-      currentUser.getAllBookings(allBookings)
-      currentUser.getTotalSpent(allRooms.flat(1))
-      domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
-    })
-    .catch(err => console.log(err))
-};
+// const getUpdatedData = () => {
+//   const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`
+//   const userData = fetch(url)
+//     .then(response => response.json());
+//   const newBookings = fetch("http://localhost:3001/api/v1/bookings")
+//     .then(response => response.json());
+//   Promise.all([userData, newBookings])
+//     .then(data => {
+//       currentUser = new User(data[0])
+//       allBookings = data[1]['bookings'];
+//       currentUser.getAllBookings(allBookings)
+//       currentUser.getTotalSpent(allRooms.flat(1))
+//       domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
+//     })
+//     .catch(err => console.log(err))
+// };
 
 const booking = (date) => {
   currentHotel.getAvailableRooms(date);
@@ -100,15 +100,22 @@ const booking = (date) => {
 // Event Listeners
 
 loginBtn.addEventListener('click', function (event) {
-    event.preventDefault()
-    const username = document.getElementById('username');
-    const password = document.getElementById('password')
+  event.preventDefault()
+  const username = document.getElementById('username');
+  const password = document.getElementById('password')
 
-    if (username.value.slice(0, 8) === 'customer' && password.value === 'overlook2021') {
-        domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1))
+  if (username.value.slice(0, 8) === 'customer' && password.value === 'overlook2021') {
+    if (username.value.split('').length >= 10) {
+      const split = username.value.split('').length - 8;
+      const name = username.value.split("").slice(-split).join("");
+      getUpdatedData(name)
     } else {
-        console.log('wrong')
-    }
+      console.log('nope')
+    } 
+    domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1))
+  } else {
+    console.log('wrong')
+  }
 })
 
 checkIn.addEventListener('change', function () {

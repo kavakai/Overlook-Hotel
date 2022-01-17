@@ -10,6 +10,7 @@ const mainDisplay = document.getElementById("mainScreen");
 const allRoomsSection = document.getElementById("rooms");
 const mainImg = document.getElementById("welcomePage")
 const loginPage = document.querySelector(".login")
+const nav = document.querySelector(".nav-buttons")
 
 const domUpdates = {
   hide(elements) {
@@ -23,7 +24,7 @@ const domUpdates = {
     displayCurrentUserInfo(user, rooms) {
       console.log('im hitting')
     this.hide([loginPage]);
-    this.show([mainDisplay]);
+    this.show([mainDisplay, nav]);
     welcomeMsg.innerText = '';
     pastStay.innerHTML = '';
     totalAmt.innerText = '';
