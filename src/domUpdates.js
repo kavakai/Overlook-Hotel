@@ -7,24 +7,24 @@ const totalAmt = document.getElementById("totalSpent");
 const futureStay = document.getElementById("futureStay");
 const mainDisplay = document.getElementById("mainScreen");
 const allRoomsSection = document.getElementById("rooms");
+const mainImg = document.getElementById("welcomePage")
 
 const domUpdates = {
-    hide(elements) {
-        elements.map(element => element.classList.add('hidden'))
+    hide(element) {
+        element.classList.add('hidden')
     },
 
-    show(elements) {
-        elements.map(element => element.classList.remove('hidden'))
+    show(element) {
+        element.classList.remove('hidden')
     },
 
     displayCurrentUserInfo(user) {
-        // this.hide([allRoomsSection]);
-        // this.show([mainDisplay, welcomeMsg, pastStay, totalAmt, futureStay]);
+        this.hide(allRoomsSection);
+        this.show(mainImg);
         welcomeMsg.innerText = '';
         pastStay.innerHTML = '';
         totalAmt.innerText = '';
         futureStay.innerHTML = '';
-        allRoomsSection.innerHTML = `<img id="roomsImg" src="./images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png" alt="Grand Budapest Hotel Logo"></img>`
         user.pastBookings.map((booking) => {
             welcomeMsg.innerText = `
                 Welcome back ${user.name}
@@ -51,8 +51,8 @@ const domUpdates = {
     },
 
     displayAvailableRooms(rooms) {
-        // this.hide([welcomeMsg, pastStay, totalAmt, mainDisplay]);
-        // this.show([allRoomsSection]);
+        this.hide(mainImg);
+        this.show(allRoomsSection);
         allRoomsSection.innerHTML = '';
         if (rooms === []) {
             allRoomsSection.innerHTML = `
