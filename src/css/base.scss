@@ -28,6 +28,25 @@ nav {
   gap: 30px;
 }
 
+.main{
+  display: flex;
+  justify-content: center;
+  margin-top: 10em;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 2em;
+}
+
 #mainScreen {
   display: flex;
   flex-direction: row;
@@ -41,7 +60,12 @@ nav {
   align-items: center;
   justify-content: space-around;
   margin-top: 2em;
+  margin-right: 2em;
   overflow-y: scroll;
+}
+
+#welcomePage{
+  margin-left: 4em;
 }
 
 #logo {

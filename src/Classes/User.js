@@ -48,10 +48,6 @@ class User {
             return new Date(bookingB.date) < new Date(bookingA.date)
         });
     };
-
-    bookRoom() {
-
-    }
 };
 
 export default User
