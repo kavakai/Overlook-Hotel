@@ -71,22 +71,28 @@ const domUpdates = {
     },
 
     filterRooms(filter, rooms) {
+        console.log('it hits')
         allRoomsSection.innerHTML = '';
         if (filter === 'Select Room Type') {
             this.displayAvailableRooms(rooms)
         } else {
             const filtered = rooms.filter(room => room.roomType === filter)
-            filtered.forEach(room => {
-                allRoomsSection.innerHTML += `
-            <article id="roomDisplay">
-                <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
-                <li id="roomNum">${room.number}</li>
-                <li id="bidet">${room.bidet}</li>
-                <li id="numBeds">${room.numBeds}</li>
-                <li id="cost">${room.costPerNight}</li>
-                <button class="book-button" id=${room.number}>Book</button>
-            </article>`;
-            });
+            if (filtered.length > 0) {
+                filtered.forEach(room => {
+                    allRoomsSection.innerHTML += `
+                        <article id="roomDisplay">
+                        <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
+                        <li id="roomNum">${room.number}</li>
+                        <li id="bidet">${room.bidet}</li>
+                        <li id="numBeds">${room.numBeds}</li>
+                        <li id="cost">${room.costPerNight}</li>
+                        <button class="book-button" id=${room.number}>Book</button>
+                        </article>`;
+                });
+            } else {
+                allRoomsSection.innerHTML = `
+                <h1 id="noRooms">We are so sorry. There are no available ${filter}'s. Please try another room type.</h1>`
+            };
         };
     },
   
