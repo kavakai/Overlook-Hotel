@@ -23,8 +23,8 @@ const domUpdates = {
   },
 
   displayCurrentUserInfo(user, rooms) {
-    this.hide([loginPage]);
-    this.show([mainDisplay, nav, logOutBtn]);
+    this.hide([loginPage, allRoomsSection]);
+    this.show([mainDisplay, nav, logOutBtn, mainImg]);
     welcomeMsg.innerText = '';
     pastStay.innerHTML = '';
     totalAmt.innerText = '';

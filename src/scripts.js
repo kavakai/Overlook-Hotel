@@ -24,8 +24,6 @@ const loginBtn = document.getElementById('submit')
 
 // Global Variables
 let currentUser;
-let currentRoom;
-let newBooking;
 let allUsers = [];
 let allRooms = [];
 let allBookings = [];
@@ -71,6 +69,10 @@ const booking = (date) => {
 const updateData = (id) => {
     Promise.all([userData, roomsData, allBookingsData])
         .then((data) => {
+            currentUser = '';
+            allRooms = [];
+            allBookings = [];
+            currentHotel = '';
         allBookings.push(data[2].bookings);
             allRooms.push(data[1].rooms);
             currentUser = data[0].customers.find((user) => user.id === id);
@@ -152,4 +154,3 @@ bookRoomsSection.addEventListener('click', function (event) {
     );
   }
 });
-
