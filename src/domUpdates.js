@@ -1,4 +1,5 @@
 import bookingsData from "../test/bookings-test-data";
+import Bookings from "./Classes/Bookings";
 import User from "./Classes/User";
 
 const welcomeMsg = document.getElementById("welcome");
@@ -7,85 +8,68 @@ const totalAmt = document.getElementById("totalSpent");
 const futureStay = document.getElementById("futureStay");
 const mainDisplay = document.getElementById("mainScreen");
 const allRoomsSection = document.getElementById("rooms");
-const modal = document.getElementById("modal");
+const mainImg = document.getElementById("welcomePage")
 
 const domUpdates = {
     hide(element) {
-        element.classList.add('hidden');
+        element.classList.add('hidden')
     },
 
     show(element) {
-        element.classList.remove('hidden');
+        element.classList.remove('hidden')
     },
 
-    displayCurrentUserInfo(user) {
+    displayCurrentUserInfo(user, rooms) {
         this.hide(allRoomsSection);
-        this.show(mainDisplay);
-        this.show(welcomeMsg);
-        this.show(pastStay);
-        this.show(totalAmt);
-        this.show(futureStay);
+        this.show(mainImg);
         welcomeMsg.innerText = '';
         pastStay.innerHTML = '';
         totalAmt.innerText = '';
         futureStay.innerHTML = '';
         user.pastBookings.map((booking) => {
+            const room = rooms.find(room => {
+                if (room.number === booking.roomNumber) {
+                    return room.roomType;
+                }
+            });
             welcomeMsg.innerText = `
-                Welcome ${user.name}
+                Welcome back ${user.name}
             `;
             pastStay.innerHTML += `
              <tr>
               <td id="pastStayDate">${booking.date}</td>
               <td id="pastStayRoom">${booking.roomNumber} #</td>
-              <td id="pastStayType"></td>
+              <td id="pastStayType">${room.roomType}</td>
             </tr>
             `;
 
-            totalAmt.innerText = `$${user.totalSpent.toFixed(2)} Spent on Rooms`;
+            totalAmt.innerText = `You have spent $${user.totalSpent.toFixed(2)} on past visits`;
         });
         user.futureBookings.map((booking) => {
+            const room = rooms.find((room) => {
+              if (room.number === booking.roomNumber) {
+                return room.roomType;
+              }
+            });
             futureStay.innerHTML += `
              <tr>
               <td id="futureStayDate">${booking.date}</td>
               <td id="futureStayRoom">${booking.roomNumber} #</td>
-              <td id="futureStayType"></td>
+              <td id="futureStayType">${room.roomType}</td>
             </tr>
             `;
         });
     },
 
     displayAvailableRooms(rooms) {
-        this.hide(welcomeMsg);
-        this.hide(pastStay);
-        this.hide(totalAmt);
-        this.hide(futureStay);
-        this.hide(mainDisplay);
+        this.hide(mainImg);
         this.show(allRoomsSection);
         allRoomsSection.innerHTML = '';
-        rooms.forEach((room) => {
-            allRoomsSection.innerHTML += `
-            <article id="roomDisplay">
-                <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
-                <li id="roomNum">${room.number}</li>
-                <li id="bidet">${room.bidet}</li>
-                <li id="numBeds">${room.numBeds}</li>
-                <li id="cost">${room.costPerNight}</li>
-            </article>`;
-        });
-    },
-
-    filterRooms(filter, rooms) {
-        const modal = document.querySelector('.modal')
-        allRoomsSection.innerHTML = '';
-        if (filter === 'Select Room Type') {
-            this.displayAvailableRooms(rooms)
-            console.log(window.getComputedStyle(modal), 'modal')
-                if (window.getComputedStyle(modal).display === "none") {
-                  modal.style.display = "block";
-                };
+        if (rooms === []) {
+            allRoomsSection.innerHTML = `
+            <h1 id="noRooms">We are so sorry. There are no available rooms for the dates you suggested. Please try another date</h1>`
         } else {
-            const filtered = rooms.filter(room => room.roomType === filter)
-            filtered.forEach(room => {
+            rooms.forEach((room) => {
                 allRoomsSection.innerHTML += `
             <article id="roomDisplay">
                 <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
@@ -93,23 +77,37 @@ const domUpdates = {
                 <li id="bidet">${room.bidet}</li>
                 <li id="numBeds">${room.numBeds}</li>
                 <li id="cost">${room.costPerNight}</li>
-                <button class="book-button" id=${room.number}>Book</button>
             </article>`;
             });
         };
     },
-    
-    displayConfirm(promise, currentUser) {
-        promise
-            .then(data => this.popUpWindow(data, currentUser))
-        
-    },
 
-    rejectBooking() {
-    console.log("Im rejecting");
+    filterRooms(filter, rooms) {
+        allRoomsSection.innerHTML = '';
+        if (filter === 'Select Room Type') {
+            this.displayAvailableRooms(rooms)
+        } else {
+            const filtered = rooms.filter(room => room.roomType === filter)
+            if (filtered.length > 0) {
+                filtered.forEach(room => {
+                    allRoomsSection.innerHTML += `
+                        <article id="roomDisplay">
+                        <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
+                        <li id="roomNum">${room.number}</li>
+                        <li id="bidet">${room.bidet}</li>
+                        <li id="numBeds">${room.numBeds}</li>
+                        <li id="cost">${room.costPerNight}</li>
+                        <button class="book-button" id=${room.number}>Book</button>
+                        </article>`;
+                });
+            } else {
+                allRoomsSection.innerHTML = `
+                <h1 id="noRooms">We are so sorry. There are no available ${filter}'s. Please try another room type.</h1>`
+            };
+        };
     },
   
-    popUpWindow(data, currentUser) {
+    popUpWindow(data) {
         allRoomsSection.innerHTML = `
         <h1 id="message">${data.message}</h1>
         <h3>We look forward to seeing you on ${data.newBooking.date}</h3>

@@ -44,8 +44,7 @@ Promise.all([userData, roomsData, allBookingsData])
         allRooms.map(room => new Room(room));
         currentUser.getTotalSpent(allRooms.flat(1))
         currentHotel = new Hotel(allRooms, allBookings, currentUser);
-        console.log(currentUser, 'initial user')
-        domUpdates.displayCurrentUserInfo(currentUser)
+        domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1))
     })
     .catch(err => {
         if (!err.ok) {
@@ -63,37 +62,32 @@ const confirmBooking = (event, rooms, currentUser) => {
             "roomNumber": roomBook.number
         }
         const promise = fetch("http://localhost:3001/api/v1/bookings", {
-            method: "POST",
-            body: JSON.stringify(booking),
-            headers: {
-                "Content-Type": "application/json",
-            },
+          method: "POST",
+          body: JSON.stringify(booking),
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-            .then((response) => response.json())
-        domUpdates.displayConfirm(promise, currentUser);
+          .then((response) => response.json())
+          .then((data) => domUpdates.popUpWindow(data));
     }
 
-    const getUpdatedData = () => {
-        const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`
-        const userData = fetch(url)
-            .then(response => response.json());
-        const newBookings = fetch("http://localhost:3001/api/v1/bookings")
-            .then(response => response.json());
-        Promise.all([userData, newBookings])
-            .then(data => {
-                currentUser = new User(data[0])
-                console.log(currentUser, "current user")
-                allBookings = data[1]['bookings'];
-                currentUser.getAllBookings(allBookings)
-                setTimeout(() => {
-                    console.log(currentUser, 'in timeout')
-                }, 1000)
-                console.log(currentUser, "user in Promise")
-                domUpdates.displayCurrentUserInfo(currentUser);
-            })
+const getUpdatedData = () => {
+    const url = `http://localhost:3001/api/v1/customers/${currentUser.id}`
+    const userData = fetch(url)
+        .then(response => response.json());
+    const newBookings = fetch("http://localhost:3001/api/v1/bookings")
+        .then(response => response.json());
+    Promise.all([userData, newBookings])
+        .then(data => {
+            currentUser = new User(data[0])
+            allBookings = data[1]['bookings'];
+            currentUser.getAllBookings(allBookings)
+            currentUser.getTotalSpent(allRooms.flat(1))
+            domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
+        })
         .catch(err => console.log(err))
-    }
-
+};
 
 const booking = (date) => {
     currentHotel.getAvailableRooms(date);

@@ -5,6 +5,7 @@
 html{
   height: 100%;
   width: 100%;
+  font-family: 'Arvo', serif;
 }
 
 .hidden {
@@ -28,6 +29,12 @@ nav {
 }
 
 #mainScreen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#userInfo {
   margin-top: 5em;
   display: flex;
   flex-direction: column;
@@ -40,7 +47,12 @@ nav {
 #logo {
   display: flex;
   height: 12vh;
-  width: auto;
+  width: 11vw;
+}
+
+#roomsImg {
+  height: 40vh;
+  width: 40vw;
 }
 
 table,
@@ -55,10 +67,12 @@ td,
 th,
 td,
 #roomDisplay {
+  padding: .5em;
   background-color: #96d4d4;
 }
 
-#rooms {
+#rooms,
+#welcomePage {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,27 +91,4 @@ td,
 
 #totalSpent {
   margin-top: 2em;
-}
-
-.modal {
-  display: none; 
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  font-size: 20px;
 }
