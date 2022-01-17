@@ -22,7 +22,7 @@ const domUpdates = {
     elements.map((element) => element.classList.remove('hidden'));
   },
 
-    displayCurrentUserInfo(user, rooms) {
+  displayCurrentUserInfo(user, rooms) {
     this.hide([loginPage]);
     this.show([mainDisplay, nav, logOutBtn]);
     welcomeMsg.innerText = '';
@@ -76,10 +76,10 @@ const domUpdates = {
         allRoomsSection.innerHTML += `
             <article id="roomDisplay">
                 <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
-                <li id="roomNum">${room.number}</li>
-                <li id="bidet">${room.bidet}</li>
-                <li id="numBeds">${room.numBeds}</li>
-                <li id="cost">${room.costPerNight}</li>
+                <li id="roomNum">Room number ${room.number}.</li>
+                <li id="bidet">Has a bidet? ${room.bidet}.</li>
+                <li id="numBeds">Has ${room.numBeds} beds.</li>
+                <li id="cost">Price per night is ${room.costPerNight}.</li>
             </article>`;
       });
     }
@@ -96,11 +96,13 @@ const domUpdates = {
           allRoomsSection.innerHTML += `
                         <article id="roomDisplay">
                         <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
-                        <li id="roomNum">${room.number}</li>
-                        <li id="bidet">${room.bidet}</li>
-                        <li id="numBeds">${room.numBeds}</li>
-                        <li id="cost">${room.costPerNight}</li>
-                        <button class="book-button" id=${room.number}>Book</button>
+                         <li id="roomNum">Room number ${room.number}.</li>
+                        <li id="bidet">Has a bidet? ${room.bidet}.</li>
+                        <li id="numBeds">Has ${room.numBeds} beds.</li>
+                        <li id="cost">Price per night is ${room.costPerNight}.</li>
+                        <button class="book-button" id=${
+                          room.number
+                        }>Book</button>
                         </article>`;
         });
       } else {
@@ -111,6 +113,7 @@ const domUpdates = {
   },
   
   popUpWindow(data) {
+    console.log(data, 'data')
     allRoomsSection.innerHTML = `
         <h1 id="message">${data.message}</h1>
         <h3>We look forward to seeing you on ${data.newBooking.date}</h3>
