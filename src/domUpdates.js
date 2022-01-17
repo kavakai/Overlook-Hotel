@@ -11,6 +11,7 @@ const allRoomsSection = document.getElementById("rooms");
 const mainImg = document.getElementById("welcomePage")
 const loginPage = document.querySelector(".login")
 const nav = document.querySelector(".nav-buttons")
+const logOutBtn = document.querySelector(".log-out-btn")
 
 const domUpdates = {
   hide(elements) {
@@ -18,13 +19,12 @@ const domUpdates = {
   },
 
   show(elements) {
-    elements.map((element) => element.classList.remove("hidden"));
+    elements.map((element) => element.classList.remove('hidden'));
   },
 
     displayCurrentUserInfo(user, rooms) {
-      console.log('im hitting')
     this.hide([loginPage]);
-    this.show([mainDisplay, nav]);
+    this.show([mainDisplay, nav, logOutBtn]);
     welcomeMsg.innerText = '';
     pastStay.innerHTML = '';
     totalAmt.innerText = '';
@@ -65,8 +65,8 @@ const domUpdates = {
   },
 
   displayAvailableRooms(rooms) {
-    this.hide(mainImg);
-    this.show(allRoomsSection);
+    this.hide([mainImg]);
+    this.show([allRoomsSection]);
     allRoomsSection.innerHTML = '';
     if (rooms === []) {
       allRoomsSection.innerHTML = `

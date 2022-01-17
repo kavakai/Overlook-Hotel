@@ -20,7 +20,6 @@ const roomSelector = document.querySelectorAll('.filter');
 const bookRoomsSection = document.getElementById('rooms');
 const homeBtn = document.getElementById('mainPageBtn');
 const loginBtn = document.getElementById('submit')
-const logOut =document.querySelector('.log-out-btn')
 
 
 // Global Variables
@@ -79,7 +78,6 @@ const updateData = (id) => {
         .then((data) => {
         allBookings.push(data[2].bookings);
             allRooms.push(data[1].rooms);
-            console.log(id, 'id')
             currentUser = data[0].customers.find((user) => user.id === id);
             currentUser = new User(currentUser)
             allBookings.forEach((booking) =>
@@ -90,7 +88,6 @@ const updateData = (id) => {
         currentUser.getTotalSpent(allRooms.flat(1));
             currentHotel = new Hotel(allRooms, allBookings, currentUser);
           domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
-        domUpdates.hide([document.querySelector(".nav-buttons"), logOut]);
       })
       .catch((err) => {
         if (!err.ok) {
@@ -103,6 +100,14 @@ const updateData = (id) => {
 
 // Event Listeners
 
+window.addEventListener('load', function (event) {
+    event.preventDefault()
+    domUpdates.hide([
+      document.querySelector(".nav-buttons"),
+      document.querySelector(".log-out-btn"),
+    ]);
+})
+
 loginBtn.addEventListener('click', function (event) {
   event.preventDefault()
   const username = document.getElementById('username');
@@ -113,10 +118,8 @@ loginBtn.addEventListener('click', function (event) {
       const split = username.value.split('').length - 8;
         let id = username.value.split("").slice(-split);
         id = parseInt(id, 10);
-        console.log(id, 'id from pass')
         getUpdatedData(id);
         updateData(id);
-        
     } else {
       console.log('nope')
     } 
@@ -127,8 +130,8 @@ loginBtn.addEventListener('click', function (event) {
 })
 
 checkIn.addEventListener('change', function () {
-  booking(checkIn.value);
-  roomSelector.forEach(filter => {
+    booking(checkIn.value);
+    roomSelector.forEach(filter => {
     if (filter.defaultSelected) {
       filter.selected = true;
       return false;
@@ -145,7 +148,7 @@ roomFilter.addEventListener('change', function () {
 
 bookRoomsSection.addEventListener('click', function (event) {
   if (event.target.id === 'mainPageBtn') {
-    getUpdatedData(currentUser);
+    updateData(currentUser.id);
   } else {
     confirmBooking(
       event,
