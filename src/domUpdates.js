@@ -1,4 +1,5 @@
 import bookingsData from "../test/bookings-test-data";
+import Bookings from "./Classes/Bookings";
 import User from "./Classes/User";
 
 const welcomeMsg = document.getElementById("welcome");
@@ -18,7 +19,7 @@ const domUpdates = {
         element.classList.remove('hidden')
     },
 
-    displayCurrentUserInfo(user) {
+    displayCurrentUserInfo(user, rooms) {
         this.hide(allRoomsSection);
         this.show(mainImg);
         welcomeMsg.innerText = '';
@@ -26,6 +27,11 @@ const domUpdates = {
         totalAmt.innerText = '';
         futureStay.innerHTML = '';
         user.pastBookings.map((booking) => {
+            const room = rooms.find(room => {
+                if (room.number === booking.roomNumber) {
+                    return room.roomType;
+                }
+            });
             welcomeMsg.innerText = `
                 Welcome back ${user.name}
             `;
@@ -33,18 +39,23 @@ const domUpdates = {
              <tr>
               <td id="pastStayDate">${booking.date}</td>
               <td id="pastStayRoom">${booking.roomNumber} #</td>
-              <td id="pastStayType"></td>
+              <td id="pastStayType">${room.roomType}</td>
             </tr>
             `;
 
             totalAmt.innerText = `You have spent $${user.totalSpent.toFixed(2)} on past visits`;
         });
         user.futureBookings.map((booking) => {
+            const room = rooms.find((room) => {
+              if (room.number === booking.roomNumber) {
+                return room.roomType;
+              }
+            });
             futureStay.innerHTML += `
              <tr>
               <td id="futureStayDate">${booking.date}</td>
               <td id="futureStayRoom">${booking.roomNumber} #</td>
-              <td id="futureStayType"></td>
+              <td id="futureStayType">${room.roomType}</td>
             </tr>
             `;
         });
@@ -72,7 +83,6 @@ const domUpdates = {
     },
 
     filterRooms(filter, rooms) {
-        console.log('it hits')
         allRoomsSection.innerHTML = '';
         if (filter === 'Select Room Type') {
             this.displayAvailableRooms(rooms)

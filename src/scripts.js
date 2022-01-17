@@ -44,8 +44,7 @@ Promise.all([userData, roomsData, allBookingsData])
         allRooms.map(room => new Room(room));
         currentUser.getTotalSpent(allRooms.flat(1))
         currentHotel = new Hotel(allRooms, allBookings, currentUser);
-        console.log(currentUser, 'initial user')
-        domUpdates.displayCurrentUserInfo(currentUser)
+        domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1))
     })
     .catch(err => {
         if (!err.ok) {
@@ -85,7 +84,7 @@ const getUpdatedData = () => {
             allBookings = data[1]['bookings'];
             currentUser.getAllBookings(allBookings)
             currentUser.getTotalSpent(allRooms.flat(1))
-            domUpdates.displayCurrentUserInfo(currentUser);
+            domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
         })
         .catch(err => console.log(err))
 };
