@@ -69,13 +69,19 @@ const domUpdates = {
             <h1 id="noRooms">We are so sorry. There are no available rooms for the dates you suggested. Please try another date</h1>`
     } else {
       rooms.forEach((room) => {
+        let beds;
+        if (room.numBeds > 1) {
+          beds = 'beds'
+        } else {
+          beds = "bed";
+        }  
         allRoomsSection.innerHTML += `
             <article id="roomDisplay">
                 <h1>SELECT A ROOM ABOVE TO BOOK</h1>
                 <li class="type-of-room">${room.roomType.toUpperCase()}</li>
                 <li id="roomNum">Room number ${room.number}.</li>
                 <li id="bidet">Has a bidet? ${room.bidet}.</li>
-                <li id="numBeds">Has ${room.numBeds} beds.</li>
+                <li id="numBeds">Has ${room.numBeds} ${room.bedSize} ${beds}.</li>
                 <li id="cost">Price per night is ${room.costPerNight}.</li>
             </article>`;
       });
