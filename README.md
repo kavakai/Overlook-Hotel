@@ -8,12 +8,15 @@ This was a Turing School, Mod 2, final project. The focus for this project was i
 ## App Clips
 
 Once you start the app you are shown a login page:
+
 ![](https://media.giphy.com/media/vRNd94ONJvmsBCEhij/giphy.gif)
 
-Once you have logged in, you are shown your visit history as well as the total amount you have spent so far. You are then able to search for a new booking based on the date and room type.
+Once you have logged in, you are shown your visit history as well as the total amount you have spent so far. You are then able to search for a new booking based on the date and room type:
+
 ![](https://media.giphy.com/media/GcqtVlWtddo8ozpJtW/giphy.gif)
 
-After you have made a booking, you are shown a message confirming your booking and a booking id. When you are all finished, you can log out and start again.
+After you have made a booking, you are shown a message confirming your booking and a booking id. When you are all finished, you can log out and start again:
+
 ![](https://media.giphy.com/media/GnIpHQV2tctNPL39gR/giphy.gif)
 
 ## Future Additions
