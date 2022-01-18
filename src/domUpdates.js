@@ -103,9 +103,7 @@ const domUpdates = {
                         <li id="bidet">Has a bidet? ${room.bidet}.</li>
                         <li id="numBeds">Has ${room.numBeds} beds.</li>
                         <li id="cost">Price per night is ${room.costPerNight}.</li>
-                        <button class="book-button" id=${
-                          room.number
-                        }>Book</button>
+                        <button class="book-button" id=${room.number}>Book</button>
                         </article>`;
         });
       } else {
