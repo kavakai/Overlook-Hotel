@@ -1,10 +1,10 @@
 /* This is an example of how to import a partial scss file*/
 @import "_variables";
 @import "_reset";
+@import "_mixins";
 
 html{
-  height: 100%;
-  width: 100%;
+  @include size(100%, 100%);
   font-family: 'Arvo', serif;
 }
 
@@ -17,20 +17,17 @@ body {
 }
 
 nav {
-  display: flex;
-  justify-content: space-around;
+  @include flexBox(space-around);
 }
 
 .nav-buttons {
-  display: flex;
-  justify-content: space-around;
+  @include flexBox(space-around);
   padding: 0.5em 3em 0.5em 3em;
   gap: 30px;
 }
 
 .main{
-  display: flex;
-  justify-content: center;
+  @include flexBox(center);
   margin-top: 10em;
 }
 
@@ -41,24 +38,21 @@ nav {
 }
 
 .login{
-  display: flex;
+  @include flexBox(space-evenly);
   flex-direction: column;
-  justify-content: space-evenly;
   margin: 2em;
 }
 
 #mainScreen {
-  display: flex;
+  @include flexBox(space-evenly);
   flex-direction: row;
-  justify-content: space-evenly;
 }
 
 #userInfo {
   margin-top: 5em;
-  display: flex;
+  @include flexBox(space-around);
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   margin-top: 2em;
   margin-right: 2em;
   overflow-y: scroll;
@@ -70,13 +64,11 @@ nav {
 
 #logo {
   display: flex;
-  height: 12vh;
-  width: 11vw;
+  @include size(12vh, 11vw);
 }
 
 #roomsImg {
-  height: 40vh;
-  width: 40vw;
+  @include size(40vh, 40vw);
 }
 
 table,
@@ -92,25 +84,22 @@ th,
 td,
 #roomDisplay {
   padding: .5em;
-  background-color: #96d4d4;
+  background-color: #edc7e3;
 }
 
 #rooms,
 #welcomePage {
-  display: flex;
+  @include flexBox(center);
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
 #roomDisplay {
-  display: flex;
+  @include flexBox(center);
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   padding-left: 5em;
-  height: 15vh;
-  width: 25vw;
+  @include size(12vh, 25vw);
 }
 
 #totalSpent {

@@ -1,0 +1,9 @@
+@mixin flexBox($content) {
+    display: flex;
+    justify-content: $content;
+}
+
+@mixin size($h, $w) {
+    height: $h;
+    height: $w;
+}
