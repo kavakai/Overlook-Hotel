@@ -20,6 +20,12 @@ nav {
   @include flexBox(space-around);
 }
 
+#username, 
+#password,
+#submit {
+  background: $secondary-background;
+}
+
 .nav-buttons {
   @include flexBox(space-around);
   padding: 0.5em 3em 0.5em 3em;
@@ -28,19 +34,19 @@ nav {
 
 .main{
   @include flexBox(center);
-  margin-top: 10em;
+  margin-top: 7em;
 }
 
 .login-form{
   display: flex;
   flex-direction: column;
-  margin-top: 2em;
+  margin-top: $emSpace;
 }
 
 .login{
   @include flexBox(space-evenly);
   flex-direction: column;
-  margin: 2em;
+  margin: $emSpace;
 }
 
 #mainScreen {
@@ -53,8 +59,8 @@ nav {
   @include flexBox(space-around);
   flex-direction: column;
   align-items: center;
-  margin-top: 2em;
-  margin-right: 2em;
+  margin-top: $emSpace;
+  margin-right: $emSpace;
   overflow-y: scroll;
 }
 
@@ -64,7 +70,7 @@ nav {
 
 #logo {
   display: flex;
-  @include size(12vh, 11vw);
+  @include size(10vh, 8vw);
 }
 
 #roomsImg {
@@ -75,7 +81,7 @@ table,
 th,
 td,
 #roomDisplay {
-  margin-top: 2em;
+  margin-top: $emSpace;
   border: 1px black;
   border-style: ridge;
 }
@@ -84,7 +90,7 @@ th,
 td,
 #roomDisplay {
   padding: .5em;
-  background-color: #edc7e3;
+  background: $secondary-background;
 }
 
 #rooms,
@@ -103,5 +109,11 @@ td,
 }
 
 #totalSpent {
-  margin-top: 2em;
+  margin-top: $emSpace;
+}
+
+#checkIn,
+#roomType,
+.log-out-btn {
+  background: $secondary-background;
 }
