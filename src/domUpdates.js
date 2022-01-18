@@ -68,14 +68,15 @@ const domUpdates = {
     this.hide([mainImg]);
     this.show([allRoomsSection]);
     allRoomsSection.innerHTML = '';
-    if (rooms === []) {
+    if (!rooms.length) {
       allRoomsSection.innerHTML = `
             <h1 id="noRooms">We are so sorry. There are no available rooms for the dates you suggested. Please try another date</h1>`
     } else {
       rooms.forEach((room) => {
         allRoomsSection.innerHTML += `
             <article id="roomDisplay">
-                <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
+                <h1>SELECT A ROOM ABOVE TO BOOK</h1>
+                <li class="type-of-room">${room.roomType.toUpperCase()}</li>
                 <li id="roomNum">Room number ${room.number}.</li>
                 <li id="bidet">Has a bidet? ${room.bidet}.</li>
                 <li id="numBeds">Has ${room.numBeds} beds.</li>
@@ -113,7 +114,6 @@ const domUpdates = {
   },
   
   popUpWindow(data) {
-    console.log(data, 'data')
     allRoomsSection.innerHTML = `
         <h1 id="message">${data.message}</h1>
         <h3>We look forward to seeing you on ${data.newBooking.date}</h3>
@@ -122,6 +122,13 @@ const domUpdates = {
         <button id="mainPageBtn">Home</button>
         `
   },
+
+  displayErr(name, message) {
+    const page = document.getElementById(name)
+    page.innerHTML = `
+    <h1 id="message">${message}. Please try again.</h1>
+    `;
+  }
 
 };
 

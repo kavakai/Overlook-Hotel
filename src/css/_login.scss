@@ -1,0 +1,19 @@
+#username, 
+#password,
+#submit {
+  background: $secondary-background;
+  @include size(5vh, 10vw);
+  border-radius: 4px;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  margin-top: $emSpace;
+}
+
+.login{
+  @include flexBox(space-evenly);
+  flex-direction: column;
+  margin: $emSpace;
+}

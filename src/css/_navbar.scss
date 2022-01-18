@@ -1,0 +1,15 @@
+nav {
+  @include flexBox(space-around);
+  position: sticky;
+}
+
+.nav-buttons {
+  @include flexBox(space-around);
+  padding: 0.5em 3em 0.5em 3em;
+  gap: 30px;
+}
+
+#logo {
+  display: flex;
+  @include size(12vh, 12vw);
+}

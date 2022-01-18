@@ -16,7 +16,7 @@
       <label for="checkIn">Book Room</label>
       <input id="checkIn" type="date" required>
       <select id="roomType" name="Room Type">
-        <option class="filter" selected="selected" value="Select Room Type">Select Room Type</option>
+        <option class="filter" selected="selected" value="Select Room Type">Select a Room</option>
         <option class="filter" value="single room" >Single Room</option>
         <option class="filter" value="suite">Suite</option>
         <option class="filter" value="junior suite">Junior Suite</option>
@@ -34,6 +34,7 @@
         <label for="password">Enter you password</label>
         <input id="password" type="password" name="password" placeholder="Password"><br>
         <button id="submit">Submit</button>
+        <h3 id="error"></h3>
       </form>
     </section>
     <section class="main-screen hidden" id="mainScreen">
@@ -43,7 +44,10 @@
         <article id="pastBook">
           <table class="table">
             <thead>
-              <tr id="pastTitle">Past Bookings
+              <tr id="pastTitle">
+                <th colspan="3">Past Bookings</th>
+              </tr>
+              <tr>
                 <th colspan="1">Date</th>
                 <th colspan="1">Room Number</th>
                 <th colspan="1">Room Type</th> 
@@ -60,7 +64,10 @@
         <article id="futureBook">
           <table class="table">
             <thead>
-              <tr id="futureTitle">Upcoming Stays
+              <tr id="futureTitle">
+                <th colspan="3">Upcoming Stays</th>
+              </tr>
+              <tr>
                 <th colspan="1">Date</th>
                 <th colspan="1">Room Number</th>
                 <th colspan="1">Room Type</th>
@@ -81,6 +88,7 @@
           alt="Grand Budapest Hotel Logo"></img>
       </section>
       <section class="rooms" id="rooms">
+        
       </section>
     </section>
   </main>

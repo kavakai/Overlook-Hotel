@@ -9,7 +9,7 @@ const allBookingsData = fetch("http://localhost:3001/api/v1/bookings")
 
 const updateBookings = (booking) => {
   return fetch("http://localhost:3001/api/v1/bookings", {
-    method: "POST",
+    method: "OST",
     body: JSON.stringify(booking),
     headers: {
       "Content-Type": "application/json",
