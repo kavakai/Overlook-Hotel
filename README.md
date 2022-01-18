@@ -14,7 +14,7 @@ Once you have logged in, you are shown your visit history as well as the total a
 ![](https://media.giphy.com/media/GcqtVlWtddo8ozpJtW/giphy.gif)
 
 After you have made a booking, you are shown a message confirming your booking and a booking id. When you are all finished, you can log out and start again.
-1[](https://media.giphy.com/media/GnIpHQV2tctNPL39gR/giphy.gif)
+![](https://media.giphy.com/media/GnIpHQV2tctNPL39gR/giphy.gif)
 
 ## Future Additions
 
