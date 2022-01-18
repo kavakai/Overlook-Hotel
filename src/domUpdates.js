@@ -1,7 +1,3 @@
-import bookingsData from "../test/bookings-test-data";
-import Bookings from "./Classes/Bookings";
-import User from "./Classes/User";
-
 const welcomeMsg = document.getElementById("welcome");
 const pastStay = document.getElementById("pastStay");
 const totalAmt = document.getElementById("totalSpent");
