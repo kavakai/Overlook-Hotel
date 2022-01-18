@@ -5,5 +5,5 @@
 
 @mixin size($h, $w) {
     height: $h;
-    height: $w;
+    width: $w;
 }

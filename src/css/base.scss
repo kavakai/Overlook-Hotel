@@ -2,6 +2,8 @@
 @import "_variables";
 @import "_reset";
 @import "_mixins";
+@import "_navbar";
+@import "_login";
 
 html{
   @include size(100%, 100%);
@@ -16,65 +18,33 @@ body {
   background: $primary-background;
 }
 
-nav {
-  @include flexBox(space-around);
-}
-
-#username, 
-#password,
-#submit {
-  background: $secondary-background;
-}
-
-.nav-buttons {
-  @include flexBox(space-around);
-  padding: 0.5em 3em 0.5em 3em;
-  gap: 30px;
-}
-
 .main{
   @include flexBox(center);
   margin-top: 7em;
 }
 
-.login-form{
-  display: flex;
-  flex-direction: column;
-  margin-top: $emSpace;
-}
-
-.login{
-  @include flexBox(space-evenly);
-  flex-direction: column;
-  margin: $emSpace;
-}
-
 #mainScreen {
   @include flexBox(space-evenly);
   flex-direction: row;
+  overflow-y: auto;
 }
 
 #userInfo {
-  margin-top: 5em;
-  @include flexBox(space-around);
+  @include flexBox(flex-start);
   flex-direction: column;
   align-items: center;
   margin-top: $emSpace;
   margin-right: $emSpace;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 #welcomePage{
-  margin-left: 4em;
-}
-
-#logo {
-  display: flex;
-  @include size(10vh, 8vw);
+  @include flexBox(flex-start);
+  margin-left: 2em;
 }
 
 #roomsImg {
-  @include size(40vh, 40vw);
+  @include size(25vh, 25vw);
 }
 
 table,
@@ -84,6 +54,8 @@ td,
   margin-top: $emSpace;
   border: 1px black;
   border-style: ridge;
+  overflow: auto;
+  // @include flexBox(center);
 }
 
 th,
@@ -91,11 +63,12 @@ td,
 #roomDisplay {
   padding: .5em;
   background: $secondary-background;
+  // @include flexBox(center);
 }
 
 #rooms,
 #welcomePage {
-  @include flexBox(center);
+  @include flexBox(flex-start);
   flex-direction: column;
   align-items: center;
 }
@@ -105,7 +78,7 @@ td,
   flex-direction: column;
   align-items: flex-start;
   padding-left: 5em;
-  @include size(12vh, 25vw);
+  @include size(12vh, 20vw);
 }
 
 #totalSpent {
