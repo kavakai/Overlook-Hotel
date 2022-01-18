@@ -47,7 +47,7 @@ const confirmBooking = (event, rooms, currentUser) => {
   }
     updateBookings(booking)
       .then((data) => domUpdates.popUpWindow(data))
-      .catch((err) => console.log(err));
+      .catch((err) => domUpdates.displayErr('rooms', err.message));
 }
 
 
@@ -74,29 +74,24 @@ const booking = (date) => {
 
 const updateData = (id) => {
     Promise.all([userData, roomsData, allBookingsData])
-        .then((data) => {
-            currentUser = '';
-            allRooms = [];
-            allBookings = [];
-            currentHotel = '';
+      .then((data) => {
+        currentUser = "";
+        allRooms = [];
+        allBookings = [];
+        currentHotel = "";
         allBookings.push(data[2].bookings);
-            allRooms.push(data[1].rooms);
-            currentUser = data[0].customers.find((user) => user.id === id);
-            currentUser = new User(currentUser)
-            allBookings.forEach((booking) =>
-              currentUser.getAllBookings(booking)
-            );
+        allRooms.push(data[1].rooms);
+        currentUser = data[0].customers.find((user) => user.id === id);
+        currentUser = new User(currentUser);
+        allBookings.forEach((booking) => currentUser.getAllBookings(booking));
         allBookings.map((booking) => new Bookings(booking));
         allRooms.map((room) => new Room(room));
         currentUser.getTotalSpent(allRooms.flat(1));
-            currentHotel = new Hotel(allRooms, allBookings, currentUser);
-          domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
+        currentHotel = new Hotel(allRooms, allBookings, currentUser);
+        domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
       })
-      .catch((err) => {
-        if (!err.ok) {
-          console.log(err);
-        }
-      });
+      .catch(
+        (err) => domUpdates.displayErr("error", err.message));
 }
 
 const logOut = () => {
@@ -135,12 +130,12 @@ loginBtn.addEventListener('click', function (event) {
         id = parseInt(id, 10);
         getUpdatedData(id);
         updateData(id);
-    } else {
-      console.log('nope')
-    } 
-    
+    }
   } else {
-    console.log('wrong')
+    domUpdates.displayErr(
+      "error",
+      "Login incorrect. Check your spelling"
+    );
   }
 })
 

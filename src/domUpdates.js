@@ -68,7 +68,7 @@ const domUpdates = {
     this.hide([mainImg]);
     this.show([allRoomsSection]);
     allRoomsSection.innerHTML = '';
-    if (rooms === []) {
+    if (!rooms.length) {
       allRoomsSection.innerHTML = `
             <h1 id="noRooms">We are so sorry. There are no available rooms for the dates you suggested. Please try another date</h1>`
     } else {
@@ -122,6 +122,13 @@ const domUpdates = {
         <button id="mainPageBtn">Home</button>
         `
   },
+
+  displayErr(name, message) {
+    const page = document.getElementById(name)
+    page.innerHTML = `
+    <h1 id="message">${message}. Please try again.</h1>
+    `;
+  }
 
 };
 

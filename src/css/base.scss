@@ -32,3 +32,7 @@ body {
   @include size(80vh, 80vw);
   overflow: $scroll;
 }
+
+#error {
+  color: red;
+}
