@@ -20,6 +20,12 @@ const roomSelector = document.querySelectorAll('.filter');
 const bookRoomsSection = document.getElementById('rooms');
 const homeBtn = document.getElementById('mainPageBtn');
 const loginBtn = document.getElementById('submit')
+const logOutBtn = document.getElementById('logOutBtn');
+const mainDisplay = document.getElementById("mainScreen");
+const allRoomsSection = document.getElementById("rooms");
+const mainImg = document.getElementById("welcomePage");
+const loginPage = document.querySelector(".login");
+const nav = document.querySelector(".nav-buttons");
 
 
 // Global Variables
@@ -93,6 +99,18 @@ const updateData = (id) => {
       });
 }
 
+const logOut = () => {
+  currentUser = '';
+  allUsers = [];
+  allRooms = [];
+  allBookings = [];
+  currentHotel = '';
+  domUpdates.show([loginPage, allRoomsSection]);
+  domUpdates.hide([mainDisplay, nav, logOutBtn, mainImg]);
+  document.getElementById("username").value = '';
+  document.getElementById("password").value = '';
+}
+
 
 
 // Event Listeners
@@ -154,3 +172,5 @@ bookRoomsSection.addEventListener('click', function (event) {
     );
   }
 });
+
+logOutBtn.addEventListener('click', logOut)
