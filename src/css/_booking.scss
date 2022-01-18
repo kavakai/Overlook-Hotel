@@ -1,0 +1,15 @@
+#rooms,
+#welcomePage {
+  @include flexBox(flex-start);
+  flex-direction: column;
+  align-items: center;
+  overflow: $scroll;
+}
+
+#roomDisplay {
+  @include flexBox(center);
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 5em;
+  @include size(12vh, 20vw);
+}

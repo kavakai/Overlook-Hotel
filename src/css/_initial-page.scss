@@ -1,0 +1,38 @@
+#userInfo {
+  @include flexBox(flex-start);
+  flex-direction: column;
+  align-items: center;
+  margin-top: $emSpace;
+  margin-right: $emSpace;
+  overflow: $scroll;
+}
+
+#welcomePage{
+  @include flexBox(flex-start);
+  margin-left: 2em;
+}
+
+#roomsImg {
+  @include size(30vh, 30vw);
+}
+
+table,
+th,
+td,
+#roomDisplay {
+  margin-top: $emSpace;
+  border: 1px black;
+  border-style: ridge;
+  overflow: $scroll;
+}
+
+th,
+td,
+#roomDisplay {
+  padding: .5em;
+  background: $secondary-background;
+}
+
+#totalSpent {
+  margin-top: $emSpace;
+}

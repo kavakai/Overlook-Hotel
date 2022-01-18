@@ -4,6 +4,9 @@
 @import "_mixins";
 @import "_navbar";
 @import "_login";
+@import "initial-page";
+@import "buttons";
+@import "booking";
 
 html{
   @include size(100%, 100%);
@@ -26,67 +29,6 @@ body {
 #mainScreen {
   @include flexBox(space-evenly);
   flex-direction: row;
-  overflow-y: auto;
-}
-
-#userInfo {
-  @include flexBox(flex-start);
-  flex-direction: column;
-  align-items: center;
-  margin-top: $emSpace;
-  margin-right: $emSpace;
-  overflow: auto;
-}
-
-#welcomePage{
-  @include flexBox(flex-start);
-  margin-left: 2em;
-}
-
-#roomsImg {
-  @include size(25vh, 25vw);
-}
-
-table,
-th,
-td,
-#roomDisplay {
-  margin-top: $emSpace;
-  border: 1px black;
-  border-style: ridge;
-  overflow: auto;
-  // @include flexBox(center);
-}
-
-th,
-td,
-#roomDisplay {
-  padding: .5em;
-  background: $secondary-background;
-  // @include flexBox(center);
-}
-
-#rooms,
-#welcomePage {
-  @include flexBox(flex-start);
-  flex-direction: column;
-  align-items: center;
-}
-
-#roomDisplay {
-  @include flexBox(center);
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 5em;
-  @include size(12vh, 20vw);
-}
-
-#totalSpent {
-  margin-top: $emSpace;
-}
-
-#checkIn,
-#roomType,
-.log-out-btn {
-  background: $secondary-background;
+  @include size(80vh, 80vw);
+  overflow: $scroll;
 }

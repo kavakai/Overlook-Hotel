@@ -1,0 +1,13 @@
+#checkIn,
+#roomType,
+.log-out-btn,
+.book-button,
+#mainPageBtn {
+  background: $secondary-background;
+  @include size(5vh, 10vw);
+  border-radius: 4px;
+}
+
+.book-button {
+  background: $primary-background;
+}
