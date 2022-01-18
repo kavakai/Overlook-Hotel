@@ -158,6 +158,8 @@ roomFilter.addEventListener('change', function () {
 
 bookRoomsSection.addEventListener('click', function (event) {
   if (event.target.id === 'mainPageBtn') {
+    checkIn.valueAsDate = new Date()
+    roomFilter.value = 'Select Room Type';
     updateData(currentUser.id);
   } else {
     confirmBooking(
