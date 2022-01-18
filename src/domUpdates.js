@@ -75,7 +75,8 @@ const domUpdates = {
       rooms.forEach((room) => {
         allRoomsSection.innerHTML += `
             <article id="roomDisplay">
-                <h1 class="type-of-room">${room.roomType.toUpperCase()}</h1>
+                <h1>SELECT A ROOM ABOVE TO BOOK</h1>
+                <li class="type-of-room">${room.roomType.toUpperCase()}</li>
                 <li id="roomNum">Room number ${room.number}.</li>
                 <li id="bidet">Has a bidet? ${room.bidet}.</li>
                 <li id="numBeds">Has ${room.numBeds} beds.</li>
