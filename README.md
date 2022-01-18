@@ -4,6 +4,18 @@
 
 This was a Turing School, Mod 2, final project. The focus for this project was implementing GET and POST calls to an API, as well as continuing to build upon our Array Prototype Methods and utilizing SCSS. This project was built by myself [Kai Kuller](https://github.com/kavakai) in just under a week, or a total of approximately 40hrs. You can find the original project specs [HERE](https://frontend.turing.edu/projects/overlook.html).
 
+
+## App Clips
+
+Once you start the app you are shown a login page:
+![](https://media.giphy.com/media/vRNd94ONJvmsBCEhij/giphy.gif)
+
+Once you have logged in, you are shown your visit history as well as the total amount you have spent so far. You are then able to search for a new booking based on the date and room type.
+![](https://media.giphy.com/media/GcqtVlWtddo8ozpJtW/giphy.gif)
+
+After you have made a booking, you are shown a message confirming your booking and a booking id. When you are all finished, you can log out and start again.
+1[](https://media.giphy.com/media/GnIpHQV2tctNPL39gR/giphy.gif)
+
 ## Future Additions
 
 -A Manager class, which would have a separate display upon login, and separate app interactions such as...
