@@ -1,6 +1,6 @@
 import './css/base.scss';
 import domUpdates from './domUpdates';
-import { userData, roomsData, allBookingsData, updateBookings, getUpdatedData } from "./apiCalls";
+import { userData, roomsData, allBookingsData, updateBookings, getSingleUser } from "./apiCalls";
 import Room from './Classes/Room';
 import User from './Classes/User';
 import Bookings from './Classes/Bookings';
@@ -20,8 +20,10 @@ const ids = [
   "welcomePage",
 ];
 const [checkIn, roomFilter, allRoomsSection, loginBtn, logOutBtn, mainDisplay, mainImg] = ids.map(id => document.getElementById(id));
+
 document.getElementById('checkIn').valueAsDate = new Date();
 const today = new Date().toISOString().split('T')[0];
+
 document.getElementById('checkIn').setAttribute('min', today);
 const roomSelector = document.querySelectorAll('.filter');
 const loginPage = document.querySelector(".login");
@@ -54,25 +56,29 @@ const booking = (date) => {
 };
 
 const updateData = (id) => {
-  Promise.all([userData, roomsData, allBookingsData])
+  Promise.all([getSingleUser(id), roomsData(), allBookingsData()])
     .then((data) => {
-      currentUser = "";
-      allRooms = [];
-      allBookings = [];
-      currentHotel = "";
-      allBookings.push(data[2].bookings);
-      allRooms.push(data[1].rooms);
-      currentUser = data[0].customers.find((user) => user.id === id);
-      currentUser = new User(currentUser);
-      allBookings.forEach((booking) => currentUser.getAllBookings(booking));
-      allBookings.map((booking) => new Bookings(booking));
-      allRooms.map((room) => new Room(room));
-      currentUser.getTotalSpent(allRooms.flat(1));
-      currentHotel = new Hotel(allRooms, allBookings, currentUser);
-      domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
+      console.log(data, 'data')
+      startPage(data, id);
     })
     .catch(
       (err) => domUpdates.displayErr("error", err.message));
+}
+
+const startPage = (data) => {
+  currentUser = "";
+  allRooms = [];
+  allBookings = [];
+  currentHotel = "";
+  allBookings.push(data[2].bookings);
+  allRooms.push(data[1].rooms);
+  currentUser = new User(data[0]);
+  allBookings.forEach((booking) => currentUser.getAllBookings(booking));
+  allBookings.map((booking) => new Bookings(booking));
+  allRooms.map((room) => new Room(room));
+  currentUser.getTotalSpent(allRooms.flat(1));
+  currentHotel = new Hotel(allRooms, allBookings, currentUser);
+  domUpdates.displayCurrentUserInfo(currentUser, allRooms.flat(1));
 }
 
 const logOut = () => {
@@ -105,7 +111,7 @@ loginBtn.addEventListener('click', function (event) {
       const split = username.value.split('').length - 8;
       let id = username.value.split("").slice(-split);
       id = parseInt(id, 10);
-      getUpdatedData(id);
+      // getUpdatedData(id);
       updateData(id);
     }
   } else {
