@@ -20,6 +20,10 @@ After you have made a booking, you are shown a message confirming your booking a
 
 ## Instructions 
 
+Click [HERE](https://kavakai.github.io/Overlook-Hotel/) to see the live site.
+
+Or...
+
 - clone down the repo to your machine.
     - run `git clone [remote-address]` in your repo
     - cd into your cloned repo
@@ -32,6 +36,12 @@ After you have made a booking, you are shown a message confirming your booking a
     - run `npm start` in your terminal to start the server on your machine
     
 - navigate to `http://localhost:8080/` in your browser to see the app.
+
+- To log in...
+ ```
+ username: customer[any number from 1-50]
+ password: overlook2021
+ ```
 
 ## Future Additions
 
