@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arvo:ital@1&display=swap" rel="stylesheet">
+  <title>Overlook Hotel</title>
+</head>
+<body>
+  <nav>
+    <img id="logo" src="./images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png" alt="Hotel Logo">
+    <div class="nav-buttons">
+      <label for="checkIn">Book Room</label>
+      <input id="checkIn" type="date" required>
+      <select id="roomType" name="Room Type">
+        <option class="filter" selected="selected" value="Select Room Type">Select a Room</option>
+        <option class="filter" value="single room" >Single Room</option>
+        <option class="filter" value="suite">Suite</option>
+        <option class="filter" value="junior suite">Junior Suite</option>
+        <option class="filter" value="residential suite">Residential Suite</option>
+      </select>
+    </div>
+    <button class="log-out-btn" id="logOutBtn">Log Out</button>
+  </nav>
+  <main class="main">
+    <section class="login">
+      <h1>Login</h1>
+      <form class="login-form">
+        <label for="username">Enter you username</label>
+        <input id="username" type="text" name="username" placeholder="Username"><br>
+        <label for="password">Enter you password</label>
+        <input id="password" type="password" name="password" placeholder="Password"><br>
+        <button id="submit">Submit</button>
+        <h3 id="error"></h3>
+      </form>
+    </section>
+    <section class="main-screen hidden" id="mainScreen">
+      <article id="userInfo">
+        <h1 id="welcome">Welcome User</h1>
+        <p id="totalSpent">Total Spent</p>
+        <article id="pastBook">
+          <table class="table">
+            <thead>
+              <tr id="pastTitle">
+                <th colspan="3">Past Bookings</th>
+              </tr>
+              <tr>
+                <th colspan="1">Date</th>
+                <th colspan="1">Room Number</th>
+                <th colspan="1">Room Type</th> 
+              </tr>
+            </thead>
+            <tbody class="table" id='pastStay'>
+              <tr>
+                <td id="pastStayDate">stay date</td>
+                <td id="pastStayRoom">room #</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article id="futureBook">
+          <table class="table">
+            <thead>
+              <tr id="futureTitle">
+                <th colspan="3">Upcoming Stays</th>
+              </tr>
+              <tr>
+                <th colspan="1">Date</th>
+                <th colspan="1">Room Number</th>
+                <th colspan="1">Room Type</th>
+              </tr>
+            </thead>
+            <tbody id="futureStay">
+              <tr>
+                <td>stay date</td>
+                <td>room #</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </article>
+      <section class="welcome-page" id="welcomePage">
+        <img id="roomsImg"
+          src="./images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propaganda-5addf024831701.451758941524494372537.png"
+          alt="Grand Budapest Hotel Logo"></img>
+      </section>
+      <section class="rooms" id="rooms">
+        
+      </section>
+    </section>
+  </main>
+  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <script src="bundle.js"></script>
+
+</body>
+</html>
