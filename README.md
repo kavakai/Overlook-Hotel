@@ -26,7 +26,7 @@ After you have made a booking, you are shown a message confirming your booking a
     - run `npm install` in your terminal
     - run `npm start` 
     
-- clone down the Api repo ![HERE](https://github.com/turingschool-examples/overlook-api)
+- clone down the Api repo [HERE](https://github.com/turingschool-examples/overlook-api)
     - cd into your cloned repo
     - run `npm install` in your terminal
     - run `npm start` in your terminal to start the server on your machine
