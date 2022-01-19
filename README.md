@@ -21,10 +21,10 @@ After you have made a booking, you are shown a message confirming your booking a
 
 ## Future Additions
 
--A Manager class, which would have a separate display upon login, and separate app interactions such as...
-    -Deleting a booking
-    -Viewing todays bookings
-    -Getting an estimated total revinue for each day
+- A Manager class, which would have a separate display upon login, and separate app interactions such as...
+    - Deleting a booking
+    - Viewing todays bookings
+    - Getting an estimated total revinue for each day
 
 ## Technologies Used
 
