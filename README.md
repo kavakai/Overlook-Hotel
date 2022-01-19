@@ -37,6 +37,12 @@ Or...
     
 - navigate to `http://localhost:8080/` in your browser to see the app.
 
+- To log in...
+ ```
+ username: customer[any number from 1-50]
+ password: overlook2021
+ ```
+
 ## Future Additions
 
 - A Manager class, which would have a separate display upon login, and separate app interactions such as...
