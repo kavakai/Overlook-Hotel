@@ -1,10 +1,13 @@
-const welcomeMsg = document.getElementById("welcome");
-const pastStay = document.getElementById("pastStay");
-const totalAmt = document.getElementById("totalSpent");
-const futureStay = document.getElementById("futureStay");
-const mainDisplay = document.getElementById("mainScreen");
-const allRoomsSection = document.getElementById("rooms");
-const mainImg = document.getElementById("welcomePage")
+const ids = [
+  "welcome",
+  "pastStay",
+  "totalSpent",
+  "futureStay",
+  "mainScreen",
+  "rooms",
+  "welcomePage",
+];
+const [welcomeMsg, pastStay, totalAmt, futureStay, mainDisplay, allRoomsSection, mainImg] = ids.map(id => document.getElementById(id));
 const loginPage = document.querySelector(".login")
 const nav = document.querySelector(".nav-buttons")
 const logOutBtn = document.querySelector(".log-out-btn")

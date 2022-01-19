@@ -10,18 +10,20 @@ import './images/kisspng-m-gustave-hotel-lobby-boy-5-lobby-boy-2-zero-bar-propag
 import Hotel from './Classes/Hotel';
 
 // DOM elements
-const checkIn = document.getElementById('checkIn');
+const ids = [
+  "checkIn",
+  "roomType",
+  "rooms",
+  "submit",
+  "logOutBtn",
+  "mainScreen",
+  "welcomePage",
+];
+const [checkIn, roomFilter, allRoomsSection, loginBtn, logOutBtn, mainDisplay, mainImg] = ids.map(id => document.getElementById(id));
 document.getElementById('checkIn').valueAsDate = new Date();
 const today = new Date().toISOString().split('T')[0];
 document.getElementById('checkIn').setAttribute('min', today);
-const roomFilter = document.getElementById('roomType');
 const roomSelector = document.querySelectorAll('.filter');
-const bookRoomsSection = document.getElementById('rooms');
-const loginBtn = document.getElementById('submit')
-const logOutBtn = document.getElementById('logOutBtn');
-const mainDisplay = document.getElementById("mainScreen");
-const allRoomsSection = document.getElementById("rooms");
-const mainImg = document.getElementById("welcomePage");
 const loginPage = document.querySelector(".login");
 const nav = document.querySelector(".nav-buttons");
 
@@ -131,7 +133,7 @@ roomFilter.addEventListener('change', function () {
   );
 });
 
-bookRoomsSection.addEventListener('click', function (event) {
+allRoomsSection.addEventListener('click', function (event) {
   if (event.target.id === 'mainPageBtn') {
     checkIn.valueAsDate = new Date()
     roomFilter.value = 'Select Room Type';
