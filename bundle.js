@@ -588,16 +588,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "roomsData": () => (/* binding */ roomsData),
 /* harmony export */   "allBookingsData": () => (/* binding */ allBookingsData),
 /* harmony export */   "updateBookings": () => (/* binding */ updateBookings),
-/* harmony export */   "getUpdatedData": () => (/* binding */ getUpdatedData)
+/* harmony export */   "getSingleUser": () => (/* binding */ getSingleUser)
 /* harmony export */ });
-const userData = fetch("http://localhost:3001/api/v1/customers")
-  .then((response) => response.json());
+const userData = () => {
+  return fetch("http://localhost:3001/api/v1/customers")
+    .then((response) => response.json())
+};
 
-const roomsData = fetch("http://localhost:3001/api/v1/rooms")
-  .then((response) => response.json());
+const roomsData = () => {
+  return fetch("http://localhost:3001/api/v1/rooms")
+    .then((response) => response.json())
+};
 
-const allBookingsData = fetch("http://localhost:3001/api/v1/bookings")
-  .then((response) => response.json());
+const allBookingsData = () => {
+  return fetch("http://localhost:3001/api/v1/bookings")
+    .then((response) => response.json())
+};
 
 const updateBookings = (booking) => {
   return fetch("http://localhost:3001/api/v1/bookings", {
@@ -610,10 +616,10 @@ const updateBookings = (booking) => {
     .then(response => response.json())
 };
 
-const getUpdatedData = (id) => {
+const getSingleUser = (id) => {
   const url = `http://localhost:3001/api/v1/customers/${id}`;
   return fetch(url)
-    .then((response) => response.json());
+    .then((response) => response.json())
 }
 
 
@@ -894,8 +900,10 @@ const ids = [
   "welcomePage",
 ];
 const [checkIn, roomFilter, allRoomsSection, loginBtn, logOutBtn, mainDisplay, mainImg] = ids.map(id => document.getElementById(id));
+
 document.getElementById('checkIn').valueAsDate = new Date();
 const today = new Date().toISOString().split('T')[0];
+
 document.getElementById('checkIn').setAttribute('min', today);
 const roomSelector = document.querySelectorAll('.filter');
 const loginPage = document.querySelector(".login");
@@ -928,25 +936,29 @@ const booking = (date) => {
 };
 
 const updateData = (id) => {
-  Promise.all([_apiCalls__WEBPACK_IMPORTED_MODULE_2__.userData, _apiCalls__WEBPACK_IMPORTED_MODULE_2__.roomsData, _apiCalls__WEBPACK_IMPORTED_MODULE_2__.allBookingsData])
+  Promise.all([(0,_apiCalls__WEBPACK_IMPORTED_MODULE_2__.getSingleUser)(id), (0,_apiCalls__WEBPACK_IMPORTED_MODULE_2__.roomsData)(), (0,_apiCalls__WEBPACK_IMPORTED_MODULE_2__.allBookingsData)()])
     .then((data) => {
-      currentUser = "";
-      allRooms = [];
-      allBookings = [];
-      currentHotel = "";
-      allBookings.push(data[2].bookings);
-      allRooms.push(data[1].rooms);
-      currentUser = data[0].customers.find((user) => user.id === id);
-      currentUser = new _Classes_User__WEBPACK_IMPORTED_MODULE_4__.default(currentUser);
-      allBookings.forEach((booking) => currentUser.getAllBookings(booking));
-      allBookings.map((booking) => new _Classes_Bookings__WEBPACK_IMPORTED_MODULE_5__.default(booking));
-      allRooms.map((room) => new _Classes_Room__WEBPACK_IMPORTED_MODULE_3__.default(room));
-      currentUser.getTotalSpent(allRooms.flat(1));
-      currentHotel = new _Classes_Hotel__WEBPACK_IMPORTED_MODULE_9__.default(allRooms, allBookings, currentUser);
-      _domUpdates__WEBPACK_IMPORTED_MODULE_1__.default.displayCurrentUserInfo(currentUser, allRooms.flat(1));
+      console.log(data, 'data')
+      startPage(data, id);
     })
     .catch(
       (err) => _domUpdates__WEBPACK_IMPORTED_MODULE_1__.default.displayErr("error", err.message));
+}
+
+const startPage = (data) => {
+  currentUser = "";
+  allRooms = [];
+  allBookings = [];
+  currentHotel = "";
+  allBookings.push(data[2].bookings);
+  allRooms.push(data[1].rooms);
+  currentUser = new _Classes_User__WEBPACK_IMPORTED_MODULE_4__.default(data[0]);
+  allBookings.forEach((booking) => currentUser.getAllBookings(booking));
+  allBookings.map((booking) => new _Classes_Bookings__WEBPACK_IMPORTED_MODULE_5__.default(booking));
+  allRooms.map((room) => new _Classes_Room__WEBPACK_IMPORTED_MODULE_3__.default(room));
+  currentUser.getTotalSpent(allRooms.flat(1));
+  currentHotel = new _Classes_Hotel__WEBPACK_IMPORTED_MODULE_9__.default(allRooms, allBookings, currentUser);
+  _domUpdates__WEBPACK_IMPORTED_MODULE_1__.default.displayCurrentUserInfo(currentUser, allRooms.flat(1));
 }
 
 const logOut = () => {
@@ -979,7 +991,7 @@ loginBtn.addEventListener('click', function (event) {
       const split = username.value.split('').length - 8;
       let id = username.value.split("").slice(-split);
       id = parseInt(id, 10);
-      (0,_apiCalls__WEBPACK_IMPORTED_MODULE_2__.getUpdatedData)(id);
+      // getUpdatedData(id);
       updateData(id);
     }
   } else {
