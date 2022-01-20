@@ -59,7 +59,6 @@ const booking = (date) => {
 const updateData = (id) => {
   Promise.all([getSingleUser(id), roomsData(), allBookingsData()])
     .then((data) => {
-      console.log(data, 'data')
       startPage(data, id);
     })
     .catch(
