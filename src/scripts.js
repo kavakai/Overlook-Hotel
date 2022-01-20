@@ -52,7 +52,8 @@ const confirmBooking = (event, rooms, currentUser) => {
 }
 
 const booking = (date) => {
-  currentHotel.getAvailableRooms(date);
+    currentHotel.getAvailableRooms(date);
+    domUpdates.displayAvailableRooms(currentHotel.availableRooms)
 };
 
 const updateData = (id) => {
